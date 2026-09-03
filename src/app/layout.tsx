@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
+import { Analytics } from '@vercel/analytics/next';
 
 export const metadata: Metadata = {
   title: 'First Sip Cafe · Madina Mall, Dubai',
@@ -49,6 +50,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main style={{ flex: 1 }}>{children}</main>
           <Footer />
         </div>
+        <Analytics />
       </body>
     </html>
   );
