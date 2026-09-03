@@ -82,9 +82,20 @@ export default function Nav() {
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/assets/logo-72x72.png"
+              src="/assets/logo-256.png"
+              srcSet="/assets/logo-256.png 1x, /assets/logo-512.png 2x"
               alt="First Sip Cafe"
-              style={{ width: 52, height: 52, borderRadius: '50%', display: 'block', flex: 'none' }}
+              width={256}
+              height={256}
+              style={{
+                width: scrolled ? 50 : 62,
+                height: scrolled ? 50 : 62,
+                borderRadius: '50%',
+                display: 'block',
+                flex: 'none',
+                boxShadow: '0 6px 16px -8px rgba(43,29,22,.55)',
+                transition: 'width .35s ease, height .35s ease',
+              }}
             />
             <span style={{ display: 'flex', flexDirection: 'column', lineHeight: 1 }}>
               <span style={{ fontFamily: "'Prata',serif", fontSize: 21, letterSpacing: '.16em' }}>

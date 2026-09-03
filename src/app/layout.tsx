@@ -7,7 +7,14 @@ export const metadata: Metadata = {
   title: 'First Sip Cafe · Madina Mall, Dubai',
   description:
     'Specialty coffees, ceremonial matcha, vibrant smoothies & artisan pastries — crafted daily at Madina Mall, Ground Floor, Shop G01, Dubai.',
-  icons: { icon: '/assets/logo-72x72.png', apple: '/assets/logo-72x72.png' },
+  icons: {
+    icon: [
+      { url: '/assets/logo-32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/assets/logo-64.png', sizes: '64x64', type: 'image/png' },
+      { url: '/assets/logo-512.png', sizes: '512x512', type: 'image/png' },
+    ],
+    apple: [{ url: '/assets/logo-180.png', sizes: '180x180', type: 'image/png' }],
+  },
 };
 
 export const viewport: Viewport = {

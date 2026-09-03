@@ -141,9 +141,19 @@ export default function Footer() {
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/assets/logo-72x72.png"
+              src="/assets/logo-256.png"
+              srcSet="/assets/logo-256.png 1x, /assets/logo-512.png 2x"
               alt="First Sip Cafe"
-              style={{ width: 56, height: 56, borderRadius: '50%', display: 'block', flex: 'none' }}
+              width={256}
+              height={256}
+              style={{
+                width: 64,
+                height: 64,
+                borderRadius: '50%',
+                display: 'block',
+                flex: 'none',
+                boxShadow: '0 0 0 1px rgba(244,237,228,.12)',
+              }}
             />
             <span style={{ display: 'flex', flexDirection: 'column', lineHeight: 1 }}>
               <span style={{ fontFamily: "'Prata',serif", fontSize: 22, letterSpacing: '.16em' }}>
