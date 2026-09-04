@@ -183,7 +183,7 @@ nav.desktop-only {
     height: 0;
   }
   /* Home hero on phones: everything above the cup is compacted so the cup is
-     visible on the first screen (subtext hidden, icon buttons, one-row meta). */
+     visible on the first screen (chips hidden, icon buttons, one-row meta). */
   .hero-grid {
     padding-bottom: 48px !important;
     gap: 8px !important;
@@ -192,29 +192,14 @@ nav.desktop-only {
   .hero-copy {
     gap: 14px !important;
   }
+  /* The one-line statement from desktop stays; the four craft chips are
+     dropped so the copy block reads as a single professional description. */
   .hero-sub {
-    display: none;
+    font-size: 14px !important;
+    line-height: 1.55 !important;
+    max-width: 34ch !important;
   }
-  /* Craft strip becomes a static 2×2 grid of title-only chips: all four
-     fit the screen at once, nothing scrolls sideways. */
   .hero-craft {
-    display: grid !important;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 8px !important;
-  }
-  .hero-craft-chip {
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 9px 8px !important;
-    white-space: nowrap;
-  }
-  .hero-craft-title {
-    font-size: 10px !important;
-    letter-spacing: .12em !important;
-  }
-  .hero-craft-note {
     display: none !important;
   }
   .hero-btn {
