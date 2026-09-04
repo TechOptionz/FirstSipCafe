@@ -519,36 +519,25 @@ export default function Hero() {
                     pointerEvents: 'none',
                   }}
                 />
-                <span
+                {/* the real First Sip logo, printed on the sleeve */}
+                <div
                   style={{
                     position: 'relative',
-                    width: 38,
-                    height: 38,
+                    height: '78%',
+                    aspectRatio: '1',
                     borderRadius: '50%',
-                    border: '1.5px solid rgba(244,237,228,.85)',
-                    display: 'grid',
-                    placeItems: 'center',
-                    fontFamily: "var(--font-prata),serif",
-                    fontSize: 19,
-                    textShadow: '0 1px 0 rgba(0,0,0,.25)',
+                    boxShadow: '0 6px 14px -6px rgba(0,0,0,.55), 0 0 0 2px rgba(244,237,228,.35)',
+                    overflow: 'hidden',
                   }}
                 >
-                  S
-                </span>
-                <span
-                  style={{
-                    position: 'relative',
-                    fontFamily: "var(--font-prata),serif",
-                    fontSize: 'clamp(12px,1.4vw,15px)',
-                    letterSpacing: '.3em',
-                    textShadow: '0 1px 0 rgba(0,0,0,.25)',
-                  }}
-                >
-                  FIRST SIP
-                </span>
-                <span style={{ position: 'relative', fontSize: 8, letterSpacing: '.3em', opacity: 0.85 }}>
-                  DUBAI · EST. 2024
-                </span>
+                  <Image
+                    src="/assets/logo-256.png"
+                    alt="First Sip Cafe"
+                    fill
+                    sizes="(max-width: 859px) 80px, 140px"
+                    style={{ objectFit: 'cover' }}
+                  />
+                </div>
               </div>
               {/* sleeve edge shadows on body */}
               <div
