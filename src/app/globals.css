@@ -300,6 +300,32 @@ nav.desktop-only {
 .review-card {
   transition: transform .3s, box-shadow .3s;
 }
+/* Home review ticker: same motion as the design's ticker, pauses on hover so a quote can be read. */
+.ticker-track {
+  animation: ticker 80s linear infinite;
+}
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track {
+    animation: none;
+    overflow-x: auto;
+    width: 100% !important;
+  }
+}
+.rating-badge {
+  transition: border-color .25s, box-shadow .25s, transform .25s;
+}
+.rating-badge:hover {
+  color: inherit;
+  border-color: #c8623a !important;
+  box-shadow: 0 16px 30px -22px rgba(43, 29, 22, .5);
+  transform: translateY(-1px);
+}
+.guest-photo:hover .zoom {
+  transform: scale(1.05);
+}
 .review-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 30px 50px -30px rgba(43, 29, 22, .4);

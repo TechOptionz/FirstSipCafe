@@ -1,10 +1,11 @@
 import Link from 'next/link';
 import ImageSlot from '@/components/ImageSlot';
+import { GOOGLE_RATING } from '@/lib/reviews';
 
 const TILES = [
   { id: 'menu', href: '/menu', kicker: '50+ items', title: 'Our Menu', cta: 'View Menu', placeholder: 'Latte art close-up' },
   { id: 'visit', href: '/visit', kicker: 'Madina Mall · Dubai', title: 'Find Us', cta: 'Directions', placeholder: 'Storefront photo' },
-  { id: 'reviews', href: '/reviews', kicker: '4.9 ★ on Google', title: 'Our Guests', cta: 'Read Reviews', placeholder: 'Guests in the café' },
+  { id: 'reviews', href: '/reviews', kicker: `${GOOGLE_RATING.toFixed(1)} ★ on Google`, title: 'Our Guests', cta: 'Read Reviews', placeholder: 'Guests in the café' },
 ];
 
 export default function Tiles() {

@@ -4,6 +4,9 @@ import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { BLUR_DATA } from '@/lib/blur-data';
+import { GOOGLE_REVIEWS_URL } from '@/lib/data';
+import { GOOGLE_RATING, GOOGLE_REVIEW_COUNT } from '@/lib/reviews';
+import { GoogleMark, Stars } from '@/components/reviews/GoogleBadge';
 
 export default function Hero() {
   const cupRef = useRef<HTMLDivElement>(null);
@@ -176,11 +179,20 @@ export default function Hero() {
               color: '#c9a88f',
             }}
           >
-            <span style={{ color: '#e0855d', letterSpacing: 2 }}>★★★★★</span>
-            <span style={{ whiteSpace: 'nowrap' }}>
-              <strong style={{ fontWeight: 600, color: '#f4ede4' }}>4.9</strong> · Google Reviews ·
-              120+
-            </span>
+            <a
+              href={GOOGLE_REVIEWS_URL}
+              target="_blank"
+              rel="noopener"
+              className="hover-cream"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 10, whiteSpace: 'nowrap' }}
+            >
+              <GoogleMark size={16} />
+              <Stars value={GOOGLE_RATING} size={13} color="#e0a02a" track="rgba(244,237,228,.25)" />
+              <span>
+                <strong style={{ fontWeight: 600, color: '#f4ede4' }}>{GOOGLE_RATING.toFixed(1)}</strong> ·{' '}
+                {GOOGLE_REVIEW_COUNT} Google reviews
+              </span>
+            </a>
           </div>
         </div>
 

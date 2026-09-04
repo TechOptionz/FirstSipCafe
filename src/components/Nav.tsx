@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { MAPS_URL, PAGES, PAGE_HREFS, PAGE_LABELS, TEL_LANDLINE } from '@/lib/data';
+import { MAPS_DIRECTIONS_URL, PAGES, PAGE_HREFS, PAGE_LABELS, TEL_LANDLINE } from '@/lib/data';
 
 export default function Nav() {
   const pathname = usePathname();
@@ -148,7 +148,7 @@ export default function Nav() {
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, flex: 'none' }}>
             <a
-              href={MAPS_URL}
+              href={MAPS_DIRECTIONS_URL}
               target="_blank"
               rel="noopener"
               className="desktop-only btn-outline-dark"
@@ -277,7 +277,7 @@ export default function Nav() {
                 Call Now
               </a>
               <a
-                href={MAPS_URL}
+                href={MAPS_DIRECTIONS_URL}
                 target="_blank"
                 rel="noopener"
                 style={{

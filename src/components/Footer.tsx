@@ -5,7 +5,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import ImageSlot from '@/components/ImageSlot';
-import { MAPS_URL, TEL_LANDLINE, TEL_MOBILE } from '@/lib/data';
+import { GOOGLE_REVIEWS_URL, MAPS_DIRECTIONS_URL, MAPS_URL, TEL_LANDLINE, TEL_MOBILE } from '@/lib/data';
+import { GOOGLE_RATING, GOOGLE_REVIEW_COUNT } from '@/lib/reviews';
+import { GoogleMark, Stars } from '@/components/reviews/GoogleBadge';
 
 const colHead: React.CSSProperties = {
   fontSize: 11,
@@ -116,7 +118,7 @@ export default function Footer() {
         </div>
         <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexWrap: 'wrap', gap: 12 }}>
           <a
-            href={MAPS_URL}
+            href={MAPS_DIRECTIONS_URL}
             target="_blank"
             rel="noopener"
             className="btn-solid-light"
@@ -208,14 +210,20 @@ export default function Footer() {
             Specialty coffees, vibrant drinks &amp; artisan pastries crafted daily for Dubai. Find us on
             the Ground Floor of Madina Mall.
           </p>
-          <div
-            style={{ display: 'flex', alignItems: 'center', gap: 12, fontSize: 14, color: '#e6d6c4' }}
+          <a
+            href={GOOGLE_REVIEWS_URL}
+            target="_blank"
+            rel="noopener"
+            className="hover-cream"
+            style={{ display: 'inline-flex', alignItems: 'center', gap: 10, fontSize: 14, color: '#e6d6c4' }}
           >
-            <span style={{ color: '#c8623a', letterSpacing: 2 }}>★★★★★</span>
+            <GoogleMark size={16} />
+            <Stars value={GOOGLE_RATING} size={13} track="rgba(244,237,228,.2)" />
             <span>
-              <strong style={{ fontWeight: 500 }}>4.9</strong> · 120+ Google reviews
+              <strong style={{ fontWeight: 500 }}>{GOOGLE_RATING.toFixed(1)}</strong> · {GOOGLE_REVIEW_COUNT} Google
+              reviews
             </span>
-          </div>
+          </a>
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 14, fontSize: 15 }}>
@@ -364,7 +372,7 @@ export default function Footer() {
       >
         <span>© 2026 First Sip Cafe LLC · All Rights Reserved</span>
         <div style={{ display: 'flex', gap: 22, flexWrap: 'wrap' }}>
-          <a href="https://maps.google.com" target="_blank" rel="noopener">
+          <a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noopener">
             Google Reviews
           </a>
           <a href={MAPS_URL} target="_blank" rel="noopener">

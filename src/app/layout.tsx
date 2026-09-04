@@ -4,6 +4,47 @@ import './globals.css';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import { Analytics } from '@vercel/analytics/next';
+import { GEO, GOOGLE_REVIEWS_URL, MAPS_URL, TEL_LANDLINE } from '@/lib/data';
+import { GOOGLE_RATING, GOOGLE_REVIEW_COUNT, REVIEWS } from '@/lib/reviews';
+
+// Structured data so Google can show the rating, map and hours with the site.
+const JSON_LD = {
+  '@context': 'https://schema.org',
+  '@type': 'CafeOrCoffeeShop',
+  name: 'First Sip Cafe',
+  image: 'https://www.firstsipcafe.ae/assets/logo-512.png',
+  url: 'https://www.firstsipcafe.ae/',
+  telephone: TEL_LANDLINE,
+  servesCuisine: 'Coffee',
+  priceRange: 'AED 10–22',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Madina Mall, Ground Floor, Shop G01, Al Muhaisnah 4',
+    addressLocality: 'Dubai',
+    addressCountry: 'AE',
+  },
+  geo: { '@type': 'GeoCoordinates', latitude: GEO.lat, longitude: GEO.lng },
+  hasMap: MAPS_URL,
+  sameAs: [GOOGLE_REVIEWS_URL],
+  openingHoursSpecification: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+    opens: '09:00',
+    closes: '23:00',
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: GOOGLE_RATING,
+    reviewCount: GOOGLE_REVIEW_COUNT,
+    bestRating: 5,
+  },
+  review: REVIEWS.slice(0, 5).map((r) => ({
+    '@type': 'Review',
+    author: { '@type': 'Person', name: r.name },
+    reviewRating: { '@type': 'Rating', ratingValue: r.stars, bestRating: 5 },
+    reviewBody: r.text,
+  })),
+};
 
 // Self-hosted via next/font: no render-blocking Google Fonts request, fonts are
 // preloaded from our own origin and swapped in without layout shift.
@@ -54,6 +95,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Footer />
         </div>
         <Analytics />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }} />
       </body>
     </html>
   );

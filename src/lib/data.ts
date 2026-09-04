@@ -92,25 +92,6 @@ export const ITEM_BY_ID: Record<string, MenuItem> = Object.fromEntries(
   ALL_ITEMS.map((i) => [i.id, i]),
 );
 
-export type Review = { name: string; meta: string; when: string; text: string; initial: string };
-
-const RAW_REVIEWS: [string, string, string, string][] = [
-  ['Ahmed Al Mansoori', 'Local Guide · 14 reviews', '2 weeks ago', 'Best Spanish Latte in the area — perfectly balanced, not too sweet. The staff are genuinely friendly and the vibe is incredibly cozy. My go-to spot every single week at Madina Mall!'],
-  ['Sara M.', '5 reviews', '1 month ago', 'The Cloud Matcha is absolutely divine — creamy, earthy, not too sweet. The Blueberry Cheesecake was incredibly fresh. Amazing value for money. Will keep coming back without hesitation!'],
-  ['Khalid R.', 'Local Guide · 30 reviews', '3 weeks ago', 'Had the V60 manual brew — outstanding! You can tell they truly care about quality here. The Chemex was excellent too. A proper hidden gem inside Madina Mall. Highly recommended!'],
-  ['Fatima H.', '8 reviews', '1 month ago', 'Came with my whole family — everyone loved it! Kids had smoothies, husband had Turkish coffee, I had the Iced Spanish Latte. Croissants were freshly baked and buttery. Perfect family stop!'],
-  ['Mohammed Al Farsi', 'Local Guide · 52 reviews', '2 months ago', "First Sip Cafe is a rare find — proper specialty coffee at genuinely fair prices. The Pistachio drink is unique and absolutely worth trying. Fast service, always fresh. One of Dubai's best!"],
-  ['Layla K.', '3 reviews', '3 weeks ago', "Pink Dragon smoothie was stunning — beautiful colour and tasted amazing! Such a warm welcoming atmosphere. Perfect break while shopping. I'm already planning my next visit this weekend!"],
-];
-
-export const REVIEWS: Review[] = RAW_REVIEWS.map(([name, meta, when, text]) => ({
-  name,
-  meta,
-  when,
-  text,
-  initial: name[0],
-}));
-
 export const PICKS: { id: string; wide?: boolean; tagline: string }[] = [
   { id: 'hot-3', wide: true, tagline: 'Our signature. Espresso, steamed milk, condensed-milk sweetness.' },
   { id: 'matcha-0', tagline: 'Ceremonial matcha under a pillow of cold foam.' },
@@ -156,7 +137,19 @@ export const FEATURE_BLURBS: Record<string, string> = {
 export const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 export const WEEK = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-export const MAPS_URL = 'https://maps.google.com/?q=Madina+Mall+Dubai';
+// Google Maps listing for First Sip Cafe (feature id 0x3e5f5d667f2b2ee9:0x904ddc76f360f8da).
+/** The place page on Google Maps (official share link for the listing). */
+export const MAPS_URL = 'https://maps.app.goo.gl/L51MwfANtaEm42zJ8';
+/** The listing opened on its Reviews tab (also where "Write a review" lives). */
+export const GOOGLE_REVIEWS_URL =
+  'https://www.google.com/maps/place/First+Sip+Cafe/@25.2819904,55.3953818,17z/data=!4m8!3m7!1s0x3e5f5d667f2b2ee9:0x904ddc76f360f8da!8m2!3d25.2819856!4d55.3979621!9m1!1b1!16s%2Fg%2F11xv8crfpt?entry=ttu&g_ep=EgoyMDI2MDkwMS4wIKXMDSoASAFQAw%3D%3D';
+/** Turn-by-turn directions straight to the shop. */
+export const MAPS_DIRECTIONS_URL =
+  'https://www.google.com/maps/dir/?api=1&destination=First+Sip+Cafe,+Al+Madina+Mall,+Muhaisnah+4,+Dubai';
+/** Key-free embed of the listing (shows the place card, rating and pin). */
+export const MAPS_EMBED_URL = 'https://www.google.com/maps?cid=10398209518115813594&output=embed&hl=en';
+export const GEO = { lat: 25.2819856, lng: 55.3979621 };
+export const ADDRESS_LINES = ['Madina Mall, Ground Floor, Shop G01', 'Al Muhasinah 4, Dubai, UAE'];
 export const TEL_LANDLINE = '+97142880478';
 export const TEL_MOBILE = '+971529400208';
 

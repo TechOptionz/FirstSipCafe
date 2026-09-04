@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { GOOGLE_RATING, GOOGLE_REVIEW_COUNT } from '@/lib/reviews';
 
 export default function Stats() {
   const statsRef = useRef<HTMLDivElement>(null);
@@ -31,9 +32,9 @@ export default function Stats() {
   const e = 1 - Math.pow(1 - p, 3);
   const stats = [
     { value: Math.round(50 * e) + '+', label: 'Menu Items' },
-    { value: (4.9 * e).toFixed(1), label: 'Google Rating' },
+    { value: (GOOGLE_RATING * e).toFixed(1), label: 'Google Rating' },
     { value: Math.round(14 * e) + 'h', label: 'Open Daily' },
-    { value: Math.round(120 * e) + '+', label: 'Reviews' },
+    { value: String(Math.round(GOOGLE_REVIEW_COUNT * e)), label: 'Google Reviews' },
   ];
 
   return (

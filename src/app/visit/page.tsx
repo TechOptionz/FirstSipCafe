@@ -1,12 +1,20 @@
 import type { Metadata } from 'next';
 import ImageSlot from '@/components/ImageSlot';
 import OpeningHours from '@/components/OpeningHours';
-import { MAPS_URL, TEL_LANDLINE, TEL_MOBILE } from '@/lib/data';
+import { RatingBadge } from '@/components/reviews/GoogleBadge';
+import {
+  ADDRESS_LINES,
+  MAPS_DIRECTIONS_URL,
+  MAPS_EMBED_URL,
+  MAPS_URL,
+  TEL_LANDLINE,
+  TEL_MOBILE,
+} from '@/lib/data';
 
 export const metadata: Metadata = {
   title: 'Hours & Contact · First Sip Cafe',
   description:
-    'Madina Mall, Ground Floor, Shop G01, Al Muhasinah 4, Dubai. Open every day 9:00 AM – 11:00 PM.',
+    'Madina Mall, Ground Floor, Shop G01, Al Muhasinah 4, Dubai. Open every day 9:00 AM – 11:00 PM. Map, directions and phone.',
 };
 
 const block: React.CSSProperties = {
@@ -22,6 +30,20 @@ const label: React.CSSProperties = {
   letterSpacing: '.2em',
   textTransform: 'uppercase',
   color: '#8a6f5e',
+};
+
+const pill: React.CSSProperties = {
+  padding: '15px 26px',
+  borderRadius: 999,
+  fontSize: 13,
+  letterSpacing: '.1em',
+  textTransform: 'uppercase',
+  whiteSpace: 'nowrap',
+  minHeight: 48,
+  display: 'inline-flex',
+  alignItems: 'center',
+  gap: 8,
+  cursor: 'pointer',
 };
 
 export default function VisitPage() {
@@ -59,7 +81,6 @@ export default function VisitPage() {
             alignItems: 'center',
             gap: 14,
             padding: 'clamp(48px,7vw,96px) clamp(20px,4vw,64px)',
-            pointerEvents: 'none',
             animation: 'fadeUp .8s cubic-bezier(.2,.7,.2,1) both',
           }}
         >
@@ -84,6 +105,9 @@ export default function VisitPage() {
           >
             Contact <em style={{ fontStyle: 'italic', color: '#c9a88f' }}>Us</em>
           </h1>
+          <div style={{ marginTop: 6 }}>
+            <RatingBadge tone="dark" compact />
+          </div>
         </div>
       </div>
 
@@ -92,7 +116,7 @@ export default function VisitPage() {
           maxWidth: 'none',
           margin: 0,
           width: '100%',
-          padding: 'clamp(40px,6vw,80px) clamp(20px,4vw,64px) clamp(64px,8vw,110px)',
+          padding: 'clamp(40px,6vw,80px) clamp(20px,4vw,64px) clamp(40px,5vw,64px)',
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,340px),1fr))',
           gap: 'clamp(32px,5vw,72px)',
@@ -102,24 +126,29 @@ export default function VisitPage() {
           <div style={block}>
             <span style={label}>Address</span>
             <span style={{ fontFamily: "var(--font-prata),serif", fontSize: 22, lineHeight: 1.4 }}>
-              Madina Mall, Ground Floor, Shop G01
+              {ADDRESS_LINES[0]}
               <br />
-              Al Muhasinah 4, Dubai, UAE
+              {ADDRESS_LINES[1]}
             </span>
-            <a
-              href={MAPS_URL}
-              target="_blank"
-              rel="noopener"
-              style={{
-                fontSize: 13,
-                letterSpacing: '.1em',
-                textTransform: 'uppercase',
-                color: '#c8623a',
-                marginTop: 6,
-              }}
-            >
-              Open in Google Maps →
-            </a>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px 22px', marginTop: 6 }}>
+              <a
+                href={MAPS_DIRECTIONS_URL}
+                target="_blank"
+                rel="noopener"
+                style={{ fontSize: 13, letterSpacing: '.1em', textTransform: 'uppercase', color: '#c8623a' }}
+              >
+                Get Directions →
+              </a>
+              <a
+                href={MAPS_URL}
+                target="_blank"
+                rel="noopener"
+                className="hover-accent"
+                style={{ fontSize: 13, letterSpacing: '.1em', textTransform: 'uppercase', color: '#8a6f5e' }}
+              >
+                Open in Google Maps →
+              </a>
+            </div>
           </div>
           <div style={block}>
             <span style={label}>Landline</span>
@@ -142,6 +171,76 @@ export default function VisitPage() {
         </div>
 
         <OpeningHours />
+      </div>
+
+      {/* ── Map ────────────────────────────────────────────────────────── */}
+      <div
+        style={{
+          padding: '0 clamp(20px,4vw,64px) clamp(64px,8vw,110px)',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 20,
+        }}
+      >
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-end', gap: 14 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+            <span style={{ fontSize: 13, letterSpacing: '.22em', textTransform: 'uppercase', color: '#c8623a' }}>
+              On the map
+            </span>
+            <h2
+              style={{
+                margin: 0,
+                fontFamily: "var(--font-prata),serif",
+                fontWeight: 400,
+                fontSize: 'clamp(30px,4vw,52px)',
+                lineHeight: 1.05,
+              }}
+            >
+              Ground Floor, by the mall entrance
+            </h2>
+          </div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
+            <a
+              href={MAPS_DIRECTIONS_URL}
+              target="_blank"
+              rel="noopener"
+              className="btn-solid-dark lift1"
+              style={{ ...pill, background: '#2b1d16', color: '#f4ede4' }}
+            >
+              Get Directions
+            </a>
+            <a
+              href={MAPS_URL}
+              target="_blank"
+              rel="noopener"
+              className="btn-outline-dark"
+              style={{ ...pill, border: '1.5px solid #2b1d16' }}
+            >
+              Open in Google Maps
+            </a>
+          </div>
+        </div>
+        <div
+          className="map-frame"
+          style={{
+            position: 'relative',
+            borderRadius: 24,
+            overflow: 'hidden',
+            background: '#e6d6c4',
+            border: '1px solid rgba(43,29,22,.1)',
+            aspectRatio: '16 / 8',
+            minHeight: 320,
+          }}
+        >
+          <iframe
+            src={MAPS_EMBED_URL}
+            title="First Sip Cafe on Google Maps"
+            loading="lazy"
+            allowFullScreen
+            referrerPolicy="no-referrer-when-downgrade"
+            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', border: 0 }}
+          />
+        </div>
       </div>
     </section>
   );

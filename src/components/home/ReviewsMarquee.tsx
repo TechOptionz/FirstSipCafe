@@ -1,8 +1,11 @@
 import Link from 'next/link';
-import { REVIEWS } from '@/lib/data';
+import { HOME_REVIEWS } from '@/lib/reviews';
+import { GOOGLE_REVIEWS_URL } from '@/lib/data';
+import ReviewCard from '@/components/reviews/ReviewCard';
+import { RatingBadge } from '@/components/reviews/GoogleBadge';
 
 export default function ReviewsMarquee() {
-  const loop = [...REVIEWS, ...REVIEWS];
+  const loop = [...HOME_REVIEWS, ...HOME_REVIEWS];
 
   return (
     <div
@@ -24,7 +27,7 @@ export default function ReviewsMarquee() {
           flexWrap: 'wrap',
           justifyContent: 'space-between',
           alignItems: 'flex-end',
-          gap: 16,
+          gap: 20,
         }}
       >
         <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
@@ -50,83 +53,62 @@ export default function ReviewsMarquee() {
             What Guests <em style={{ fontStyle: 'italic', color: '#8a6f5e' }}>Say</em>
           </h2>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-          <span style={{ fontFamily: "var(--font-prata),serif", fontSize: 56, lineHeight: 1 }}>4.9</span>
-          <span style={{ display: 'flex', flexDirection: 'column' }}>
-            <span style={{ color: '#c8623a', letterSpacing: 3 }}>★★★★★</span>
-            <span style={{ fontSize: 14, color: '#5a4636' }}>120+ verified reviews</span>
-          </span>
-        </div>
+        <RatingBadge />
+      </div>
+
+      {/* ticker: pauses on hover so a quote can be read */}
+      <div className="ticker-track" style={{ display: 'flex', width: 'max-content', gap: 18, paddingLeft: 18 }}>
+        {loop.map((r, i) => (
+          <ReviewCard
+            key={i}
+            review={r}
+            clampLines={5}
+            style={{ flex: 'none', width: 'min(82vw,420px)' }}
+          />
+        ))}
       </div>
 
       <div
         style={{
           display: 'flex',
-          animation: 'ticker 70s linear infinite',
-          width: 'max-content',
-          gap: 18,
-          paddingLeft: 18,
+          flexWrap: 'wrap',
+          justifyContent: 'center',
+          alignItems: 'center',
+          gap: '14px 32px',
+          padding: '0 clamp(20px,4vw,64px)',
         }}
       >
-        {loop.map((r, i) => (
-          <article
-            key={i}
-            style={{
-              flex: 'none',
-              width: 'min(80vw,400px)',
-              background: '#fff',
-              borderRadius: 22,
-              padding: 28,
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 16,
-            }}
-          >
-            <span style={{ color: '#c8623a', letterSpacing: 2, fontSize: 14 }}>★★★★★</span>
-            <p style={{ margin: 0, fontSize: 16, lineHeight: 1.65, color: '#3a2a20', flex: 1 }}>
-              {r.text}
-            </p>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-              <span
-                style={{
-                  width: 38,
-                  height: 38,
-                  borderRadius: '50%',
-                  background: '#2b1d16',
-                  color: '#f4ede4',
-                  display: 'grid',
-                  placeItems: 'center',
-                  fontFamily: "var(--font-prata),serif",
-                }}
-              >
-                {r.initial}
-              </span>
-              <span style={{ display: 'flex', flexDirection: 'column' }}>
-                <strong style={{ fontWeight: 500, fontSize: 14 }}>{r.name}</strong>
-                <span style={{ color: '#8a6f5e', fontSize: 13 }}>
-                  {r.meta} · {r.when}
-                </span>
-              </span>
-            </div>
-          </article>
-        ))}
+        <Link
+          href="/reviews"
+          className="link-underline"
+          style={{
+            fontSize: 13,
+            letterSpacing: '.12em',
+            textTransform: 'uppercase',
+            borderBottom: '1.5px solid #2b1d16',
+            paddingBottom: 4,
+            cursor: 'pointer',
+          }}
+        >
+          All reviews →
+        </Link>
+        <a
+          href={GOOGLE_REVIEWS_URL}
+          target="_blank"
+          rel="noopener"
+          className="link-underline"
+          style={{
+            fontSize: 13,
+            letterSpacing: '.12em',
+            textTransform: 'uppercase',
+            borderBottom: '1.5px solid rgba(43,29,22,.35)',
+            paddingBottom: 4,
+            color: '#5a4636',
+          }}
+        >
+          Write a review on Google
+        </a>
       </div>
-
-      <Link
-        href="/reviews"
-        className="link-underline"
-        style={{
-          alignSelf: 'center',
-          fontSize: 13,
-          letterSpacing: '.12em',
-          textTransform: 'uppercase',
-          borderBottom: '1.5px solid #2b1d16',
-          paddingBottom: 4,
-          cursor: 'pointer',
-        }}
-      >
-        All reviews →
-      </Link>
     </div>
   );
 }

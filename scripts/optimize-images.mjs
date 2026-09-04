@@ -19,11 +19,18 @@ import sharp from 'sharp';
 import { readdirSync, statSync, unlinkSync, writeFileSync, existsSync } from 'fs';
 import { join, extname, basename, dirname, sep } from 'path';
 
+// libvips keeps recently read source files open in its operation cache, which makes
+// the unlink below fail with EBUSY on Windows. We never re-read a source, so disable it.
+sharp.cache(false);
+
 const ROOT = new URL('..', import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1');
 const PUBLIC = join(ROOT, 'public');
 const TARGETS = [
   { dir: 'public/images/menu', maxWidth: 1200, widths: [384, 640, 960] },
   { dir: 'public/images/home', maxWidth: 1920, widths: [640, 960, 1280] },
+  // Google-review photos (reviews page gallery + cards) and reviewer avatars.
+  { dir: 'public/images/reviews/photos', maxWidth: 1200, widths: [384, 640] },
+  { dir: 'public/images/reviews/avatars', maxWidth: 128, widths: [] },
   { dir: 'public/assets', maxWidth: 1920, widths: [640, 960, 1280], only: /^hero-bg\./ },
   { dir: 'public/assets', maxWidth: 256, widths: [64, 128], only: /^logo-256\./, keep: true },
 ];
@@ -57,7 +64,16 @@ for (const t of TARGETS) {
     const dst = statSync(out).size;
     before += src;
     after += dst;
-    unlinkSync(file);
+    // Windows can briefly hold a lock on freshly written/scanned files (EBUSY); retry.
+    for (let attempt = 0; ; attempt++) {
+      try {
+        unlinkSync(file);
+        break;
+      } catch (e) {
+        if (e.code !== 'EBUSY' || attempt >= 5) throw e;
+        await new Promise((r) => setTimeout(r, 400 * (attempt + 1)));
+      }
+    }
     console.log(`${basename(file)} -> ${basename(out)}  ${kb(src)} -> ${kb(dst)}`);
   }
 }
