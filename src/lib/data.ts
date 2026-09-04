@@ -134,6 +134,17 @@ export const FEATURE_BLURBS: Record<string, string> = {
   food: 'Croissants, muffins, brownies and cheesecake, baked fresh every morning to go with your cup.',
 };
 
+// Opening hours — one source of truth. Every page/component reads these, so a change here
+// updates the nav, hero, footer, visit page, item pages and the Schema.org markup together.
+export const HOURS = {
+  opens: '10:00', // 24h, for Schema.org OpeningHoursSpecification
+  closes: '22:30',
+  short: '10 AM – 10:30 PM', // tight spaces (badges, chips)
+  long: '10:00 AM – 10:30 PM', // hours tables / labels
+  everyDay: 'Every Day · 10:00 AM – 10:30 PM',
+  sentence: 'Open every day, 10:00 AM – 10:30 PM.',
+} as const;
+
 export const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 export const WEEK = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 

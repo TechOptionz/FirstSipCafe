@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
 import ImageSlot from '@/components/ImageSlot';
 import MenuBrowser from '@/components/MenuBrowser';
+import { HOURS } from '@/lib/data';
 
 export const metadata: Metadata = {
   title: 'Full Menu · First Sip Cafe',
-  description: 'Over 50 specialty coffees, matcha, smoothies and pastries. All prices in AED.',
+  description: 'Over 50 specialty coffees, matcha, smoothies and pastries. All prices in AED. Open every day 10 AM – 10:30 PM.',
 };
 
 export default function MenuPage() {
@@ -64,7 +65,7 @@ export default function MenuPage() {
             What We <em style={{ fontStyle: 'italic', color: '#c9a88f' }}>Craft</em>
           </h1>
           <p style={{ margin: 0, color: '#c9a88f', fontWeight: 300, fontSize: 18 }}>
-            All prices in AED. Made fresh, daily 9 AM – 11 PM.
+            All prices in AED. Made fresh daily. Open every day, {HOURS.short}.
           </p>
         </div>
       </div>

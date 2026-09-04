@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import ImageSlot from '@/components/ImageSlot';
-import { GOOGLE_REVIEWS_URL, MAPS_DIRECTIONS_URL, MAPS_URL, TEL_LANDLINE, TEL_MOBILE } from '@/lib/data';
+import { GOOGLE_REVIEWS_URL, HOURS, MAPS_DIRECTIONS_URL, MAPS_URL, TEL_LANDLINE, TEL_MOBILE } from '@/lib/data';
 import { GOOGLE_RATING, GOOGLE_REVIEW_COUNT } from '@/lib/reviews';
 import { GoogleMark, Stars } from '@/components/reviews/GoogleBadge';
 
@@ -113,7 +113,7 @@ export default function Footer() {
               textWrap: 'balance',
             }}
           >
-            Come by the Ground Floor. Open every day until 11 PM.
+            Come by the Ground Floor. Open every day, {HOURS.short}.
           </h2>
         </div>
         <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexWrap: 'wrap', gap: 12 }}>
@@ -172,7 +172,7 @@ export default function Footer() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: 20, gridColumn: 'span 1' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             <Image
-              src="/assets/logo-256.png"
+              src="/assets/logo.svg"
               alt="First Sip Cafe"
               width={64}
               height={64}
@@ -279,7 +279,7 @@ export default function Footer() {
             >
               Hours
             </span>
-            <span>Every Day · 9:00 AM – 11:00 PM</span>
+            <span>{HOURS.everyDay}</span>
           </span>
         </div>
 

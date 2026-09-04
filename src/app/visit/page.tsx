@@ -4,6 +4,7 @@ import OpeningHours from '@/components/OpeningHours';
 import { RatingBadge } from '@/components/reviews/GoogleBadge';
 import {
   ADDRESS_LINES,
+  HOURS,
   MAPS_DIRECTIONS_URL,
   MAPS_EMBED_URL,
   MAPS_URL,
@@ -14,7 +15,7 @@ import {
 export const metadata: Metadata = {
   title: 'Hours & Contact · First Sip Cafe',
   description:
-    'Madina Mall, Ground Floor, Shop G01, Al Muhasinah 4, Dubai. Open every day 9:00 AM – 11:00 PM. Map, directions and phone.',
+    'Madina Mall, Ground Floor, Shop G01, Al Muhasinah 4, Dubai. Open every day 10:00 AM – 10:30 PM. Map, directions and phone.',
 };
 
 const block: React.CSSProperties = {
@@ -165,7 +166,7 @@ export default function VisitPage() {
           <div style={{ ...block, borderBottom: '1px solid rgba(43,29,22,.15)' }}>
             <span style={label}>Hours</span>
             <span style={{ fontFamily: "var(--font-prata),serif", fontSize: 22 }}>
-              Every Day · 9:00 AM – 11:00 PM
+              {HOURS.everyDay}
             </span>
           </div>
         </div>

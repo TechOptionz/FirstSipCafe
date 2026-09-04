@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import ImageSlot from '@/components/ImageSlot';
-import { MAPS_URL } from '@/lib/data';
+import { HOURS, MAPS_URL } from '@/lib/data';
 
 export default function VisitCta() {
   return (
@@ -59,7 +59,7 @@ export default function VisitCta() {
           Madina Mall, Ground Floor, Shop G01
         </h2>
         <p style={{ margin: 0, color: '#c9a88f', fontWeight: 300, fontSize: 18 }}>
-          Al Muhasinah 4, Dubai, UAE · Every Day 9:00 AM – 11:00 PM
+          Al Muhasinah 4, Dubai, UAE · {HOURS.everyDay}
         </p>
         <div
           style={{

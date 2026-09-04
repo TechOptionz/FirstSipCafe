@@ -4,7 +4,7 @@ import './globals.css';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import { Analytics } from '@vercel/analytics/next';
-import { GEO, GOOGLE_REVIEWS_URL, MAPS_URL, TEL_LANDLINE } from '@/lib/data';
+import { GEO, GOOGLE_REVIEWS_URL, HOURS, MAPS_URL, TEL_LANDLINE } from '@/lib/data';
 import { GOOGLE_RATING, GOOGLE_REVIEW_COUNT, REVIEWS } from '@/lib/reviews';
 
 // Structured data so Google can show the rating, map and hours with the site.
@@ -29,8 +29,8 @@ const JSON_LD = {
   openingHoursSpecification: {
     '@type': 'OpeningHoursSpecification',
     dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-    opens: '09:00',
-    closes: '23:00',
+    opens: HOURS.opens,
+    closes: HOURS.closes,
   },
   aggregateRating: {
     '@type': 'AggregateRating',
@@ -59,7 +59,7 @@ const outfit = Outfit({
 export const metadata: Metadata = {
   title: 'First Sip Cafe · Madina Mall, Dubai',
   description:
-    'Specialty coffees, ceremonial matcha, vibrant smoothies & artisan pastries — crafted daily at Madina Mall, Ground Floor, Shop G01, Dubai.',
+    'Specialty coffees, ceremonial matcha, vibrant smoothies & artisan pastries — crafted daily at Madina Mall, Ground Floor, Shop G01, Dubai. Open every day 10 AM – 10:30 PM.',
   icons: {
     icon: [
       { url: '/assets/logo-32.png', sizes: '32x32', type: 'image/png' },

@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { DAYS, WEEK } from '@/lib/data';
+import { DAYS, HOURS, WEEK } from '@/lib/data';
 
 export default function OpeningHours() {
   // Resolved after mount: "today" depends on the visitor's clock, not the build machine's.
@@ -70,12 +70,12 @@ export default function OpeningHours() {
             <span style={{ color: today === day ? '#c8623a' : '#f4ede4', fontWeight: today === day ? 500 : 300 }}>
               {day}
             </span>
-            <span style={{ color: '#c9a88f' }}>9:00 AM – 11:00 PM</span>
+            <span style={{ color: '#c9a88f' }}>{HOURS.long}</span>
           </div>
         ))}
       </div>
 
-      <span style={{ fontSize: 14, color: '#c9a88f' }}>● Open every day of the week</span>
+      <span style={{ fontSize: 14, color: '#c9a88f' }}>● Open every day of the week, {HOURS.long}</span>
     </div>
   );
 }

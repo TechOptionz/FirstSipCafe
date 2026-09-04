@@ -195,6 +195,28 @@ nav.desktop-only {
   .hero-sub {
     display: none;
   }
+  /* Craft strip becomes a static 2×2 grid of title-only chips: all four
+     fit the screen at once, nothing scrolls sideways. */
+  .hero-craft {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px !important;
+  }
+  .hero-craft-chip {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 9px 8px !important;
+    white-space: nowrap;
+  }
+  .hero-craft-title {
+    font-size: 10px !important;
+    letter-spacing: .12em !important;
+  }
+  .hero-craft-note {
+    display: none !important;
+  }
   .hero-btn {
     padding: 13px 20px !important;
     min-height: 46px !important;
@@ -203,6 +225,47 @@ nav.desktop-only {
   .hero-cup {
     min-height: min(62vw, 300px) !important;
   }
+}
+
+/* ── Home hero craft strip ─────────────────────────────────────────────── */
+.hero-craft {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.hero-craft-chip {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(244, 237, 228, .18);
+  background: rgba(244, 237, 228, .06);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: #f4ede4;
+  text-decoration: none;
+  transition: background .25s, border-color .25s, transform .25s;
+}
+.hero-craft-chip:hover {
+  background: rgba(244, 237, 228, .12);
+  border-color: rgba(224, 133, 93, .7);
+  transform: translateY(-2px);
+}
+.hero-craft-title {
+  font-size: 11px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: #e0855d;
+}
+.hero-craft-note {
+  font-size: 13px;
+  font-weight: 300;
+  color: #d9c7b4;
+  white-space: nowrap;
 }
 
 /* ── Hover states (the design tool's style-hover attribute) ───────────── */

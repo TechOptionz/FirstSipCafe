@@ -4,12 +4,12 @@ import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { BLUR_DATA } from '@/lib/blur-data';
-import { GOOGLE_REVIEWS_URL } from '@/lib/data';
+import { GOOGLE_REVIEWS_URL, HOURS } from '@/lib/data';
 import { GOOGLE_RATING, GOOGLE_REVIEW_COUNT } from '@/lib/reviews';
 import { GoogleMark, Stars } from '@/components/reviews/GoogleBadge';
 
 /**
- * "Open now · Daily 9 AM – 11 PM" chip. Rendered twice in the hero: `floating`
+ * "Open now · Every day 10 AM – 10:30 PM" chip. Rendered twice in the hero: `floating`
  * (desktop only, absolute over the cup) and inline (mobile only, in the copy column).
  * The desktop-only / mobile-only classes in globals.css switch at 860px.
  */
@@ -54,11 +54,19 @@ function OpenBadge({ floating = false }: { floating?: boolean }) {
         Open Now
       </span>
       <span style={{ fontFamily: "var(--font-prata),serif", fontSize: floating ? 17 : 14 }}>
-        {floating ? 'Daily 9 AM – 11 PM' : '9 AM – 11 PM'}
+        {`Every Day ${HOURS.short}`}
       </span>
     </div>
   );
 }
+
+/** Hero "what we do" strip. Titles are what the café is known for; notes are the proof. */
+const CRAFT = [
+  { cat: 'brew', title: 'Manual Brew', note: 'V60 · Chemex · Aeropress · Turkish' },
+  { cat: 'hot', title: 'Specialty Coffee', note: 'Signature Spanish Latte' },
+  { cat: 'matcha', title: 'Ceremonial Matcha', note: 'Whisked fresh to order' },
+  { cat: 'food', title: 'Baked Fresh Daily', note: 'Croissants · muffins · cheesecake' },
+] as const;
 
 export default function Hero() {
   const cupRef = useRef<HTMLDivElement>(null);
@@ -179,9 +187,20 @@ export default function Hero() {
               textWrap: 'pretty',
             }}
           >
-            Specialty coffees, ceremonial matcha, vibrant smoothies &amp; artisan pastries — crafted
-            daily at Madina Mall, Dubai.
+            Specialty coffees, hand-poured manual brews, ceremonial matcha, vibrant smoothies &amp;
+            artisan pastries — crafted daily at Madina Mall, Dubai.
           </p>
+          {/* What we do: a quick scan of the café before the menu. Each chip deep-links to its category. */}
+          <ul className="hero-craft" aria-label="What we serve">
+            {CRAFT.map((c) => (
+              <li key={c.cat}>
+                <Link href={`/menu?cat=${c.cat}`} className="hero-craft-chip">
+                  <span className="hero-craft-title">{c.title}</span>
+                  <span className="hero-craft-note">{c.note}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
           <div className="hero-actions" style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginTop: 4 }}>
             <Link
               href="/menu"
@@ -531,7 +550,7 @@ export default function Hero() {
                   }}
                 >
                   <Image
-                    src="/assets/logo-256.png"
+                    src="/assets/logo.svg"
                     alt="First Sip Cafe"
                     fill
                     sizes="(max-width: 859px) 80px, 140px"

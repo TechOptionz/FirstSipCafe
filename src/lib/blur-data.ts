@@ -2,7 +2,7 @@
 // Tiny base64 previews shown while each photo loads.
 export const BLUR_DATA: Record<string, string> = {
   '/assets/hero-bg.webp': 'data:image/webp;base64,UklGRjgAAABXRUJQVlA4ICwAAADQAQCdASoKAAYABABoJQBOgCIfoM/bIAD+9X1lEn0yjOe+PULGruGQQdgAAA==',
-  '/assets/logo-256.png': 'data:image/webp;base64,UklGRr4AAABXRUJQVlA4WAoAAAAQAAAACQAACQAAQUxQSEoAAAABYNBIkqK9U0eW/l3xWyEDZGBhnjVEhNq0DRhvqYd4CsN+DIE8lTAzQ0kZymaiyA0EABjVCntQjH/8iQxhVRZkKr5HjkK3LH0kB1ZQOCBOAAAAkAEAnQEqCgAKAAQAaCWcAALcKXygAP7SnWtpp85wTgs+OgcOZ9bSJchR8RgX7JOgYutfUt3qjzH0w9o+Uc8lf0URJPluS2fu7wmuwCgA',
+  '/assets/logo-256.png': 'data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAADwAQCdASoKAAoABABoJaQAAt0Nml53VAAA/vbXwZOQpLu29L8MozJiXLzyKAAA',
   '/images/home/feature-brew.webp': 'data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAAAQAgCdASoKAAgABABoJQBOgB8x8a0m2XAAAP7mGPZEyGRhIAqv1MVsnETvJO+gtT+Yt0PxRutpGCQpvk/M5k7DAAA=',
   '/images/home/feature-food.webp': 'data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAADQAQCdASoKAAgABABoJZgCdAD5dj8o/AD9lCmejvOjizqf2gpetLz4YKvO9LVpBm2wed/E2jjX8SU5wFdg4L3LEqUw3hMSAAA=',
   '/images/home/feature-hot.webp': 'data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAADQAQCdASoKAAgABABoJZQCdADbaRJBAAD+8uY73Z15e2QhqyEJ0EQZzdhYJfc0W1DqJlBmDiMg25kAAAA=',

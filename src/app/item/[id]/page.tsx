@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import ImageSlot from '@/components/ImageSlot';
-import { ALL_ITEMS, CATS, ITEM_BY_ID, MAPS_URL, TEL_LANDLINE, pad2 } from '@/lib/data';
+import { ALL_ITEMS, CATS, HOURS, ITEM_BY_ID, MAPS_URL, TEL_LANDLINE, pad2 } from '@/lib/data';
 
 export function generateStaticParams() {
   return ALL_ITEMS.map((i) => ({ id: i.id }));
@@ -209,7 +209,7 @@ export default async function ItemPage({ params }: { params: Promise<{ id: strin
             </div>
             <div style={rowStyle}>
               <span style={{ color: '#8a6f5e' }}>Available</span>
-              <span>Every Day · 9:00 AM – 11:00 PM</span>
+              <span>{HOURS.everyDay}</span>
             </div>
             <div style={rowStyle}>
               <span style={{ color: '#8a6f5e' }}>Where</span>

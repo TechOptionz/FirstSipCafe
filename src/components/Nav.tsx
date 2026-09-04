@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { MAPS_DIRECTIONS_URL, PAGES, PAGE_HREFS, PAGE_LABELS, TEL_LANDLINE } from '@/lib/data';
+import { HOURS, MAPS_DIRECTIONS_URL, PAGES, PAGE_HREFS, PAGE_LABELS, TEL_LANDLINE } from '@/lib/data';
 
 export default function Nav() {
   const pathname = usePathname();
@@ -50,7 +50,7 @@ export default function Nav() {
                 animation: 'pulse 2s infinite',
               }}
             />
-            Open today · 9:00 AM – 11:00 PM
+            Open every day · {HOURS.long}
           </span>
           <span className="desktop-only" style={{ whiteSpace: 'nowrap' }}>
             Madina Mall · Ground Floor · Shop G01 · Dubai
@@ -82,7 +82,7 @@ export default function Nav() {
             style={{ display: 'flex', alignItems: 'center', gap: 12, cursor: 'pointer', flex: 'none' }}
           >
             <Image
-              src="/assets/logo-256.png"
+              src="/assets/logo.svg"
               alt="First Sip Cafe"
               width={62}
               height={62}
