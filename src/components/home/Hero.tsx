@@ -8,6 +8,57 @@ import { GOOGLE_REVIEWS_URL } from '@/lib/data';
 import { GOOGLE_RATING, GOOGLE_REVIEW_COUNT } from '@/lib/reviews';
 import { GoogleMark, Stars } from '@/components/reviews/GoogleBadge';
 
+/**
+ * "Open now · Daily 9 AM – 11 PM" chip. Rendered twice in the hero: `floating`
+ * (desktop only, absolute over the cup) and inline (mobile only, in the copy column).
+ * The desktop-only / mobile-only classes in globals.css switch at 860px.
+ */
+function OpenBadge({ floating = false }: { floating?: boolean }) {
+  return (
+    <div
+      className={floating ? 'desktop-only' : 'mobile-only'}
+      style={{
+        ...(floating
+          ? { position: 'absolute', right: 0, bottom: '4%', zIndex: 2 }
+          : { alignSelf: 'flex-start', marginTop: 4 }),
+        background: 'rgba(244,237,228,.95)',
+        color: '#2b1d16',
+        padding: floating ? '16px 20px' : '12px 16px',
+        borderRadius: 16,
+        flexDirection: 'column',
+        gap: 6,
+        boxShadow: '0 20px 40px -20px rgba(0,0,0,.5)',
+      }}
+    >
+      <span
+        style={{
+          fontSize: 11,
+          letterSpacing: '.18em',
+          textTransform: 'uppercase',
+          color: '#8a6f5e',
+          display: 'flex',
+          alignItems: 'center',
+          gap: 8,
+        }}
+      >
+        <span
+          style={{
+            width: 8,
+            height: 8,
+            borderRadius: '50%',
+            background: '#3ca05a',
+            animation: 'pulse 2s infinite',
+          }}
+        />
+        Open Now
+      </span>
+      <span style={{ fontFamily: "var(--font-prata),serif", fontSize: floating ? 17 : 16 }}>
+        Daily 9 AM – 11 PM
+      </span>
+    </div>
+  );
+}
+
 export default function Hero() {
   const cupRef = useRef<HTMLDivElement>(null);
   const heroTextRef = useRef<HTMLDivElement>(null);
@@ -194,6 +245,8 @@ export default function Hero() {
               </span>
             </a>
           </div>
+          {/* Mobile only: sits in the text flow so it never covers the cup or the scroll hint. */}
+          <OpenBadge />
         </div>
 
         {/* THE CUP */}
@@ -535,47 +588,9 @@ export default function Hero() {
               />
             </div>
           </div>
-          {/* floating badge */}
-          <div
-            style={{
-              position: 'absolute',
-              right: 0,
-              bottom: '4%',
-              zIndex: 2,
-              background: 'rgba(244,237,228,.95)',
-              color: '#2b1d16',
-              padding: '16px 20px',
-              borderRadius: 16,
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 6,
-              boxShadow: '0 20px 40px -20px rgba(0,0,0,.5)',
-            }}
-          >
-            <span
-              style={{
-                fontSize: 11,
-                letterSpacing: '.18em',
-                textTransform: 'uppercase',
-                color: '#8a6f5e',
-                display: 'flex',
-                alignItems: 'center',
-                gap: 8,
-              }}
-            >
-              <span
-                style={{
-                  width: 8,
-                  height: 8,
-                  borderRadius: '50%',
-                  background: '#3ca05a',
-                  animation: 'pulse 2s infinite',
-                }}
-              />
-              Open Now
-            </span>
-            <span style={{ fontFamily: "var(--font-prata),serif", fontSize: 17 }}>Daily 9 AM – 11 PM</span>
-          </div>
+          {/* Desktop: floats at the bottom-right of the cup. On mobile the same badge
+              renders inline under the rating instead (see OpenBadge below). */}
+          <OpenBadge floating />
         </div>
 
         <div
