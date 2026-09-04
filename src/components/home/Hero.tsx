@@ -20,13 +20,14 @@ function OpenBadge({ floating = false }: { floating?: boolean }) {
       style={{
         ...(floating
           ? { position: 'absolute', right: 0, bottom: '4%', zIndex: 2 }
-          : { alignSelf: 'flex-start', marginTop: 4 }),
+          : { alignSelf: 'center' }),
         background: 'rgba(244,237,228,.95)',
         color: '#2b1d16',
-        padding: floating ? '16px 20px' : '12px 16px',
-        borderRadius: 16,
-        flexDirection: 'column',
-        gap: 6,
+        padding: floating ? '16px 20px' : '8px 14px',
+        borderRadius: floating ? 16 : 999,
+        flexDirection: floating ? 'column' : 'row',
+        alignItems: floating ? 'stretch' : 'center',
+        gap: floating ? 6 : 10,
         boxShadow: '0 20px 40px -20px rgba(0,0,0,.5)',
       }}
     >
@@ -52,8 +53,8 @@ function OpenBadge({ floating = false }: { floating?: boolean }) {
         />
         Open Now
       </span>
-      <span style={{ fontFamily: "var(--font-prata),serif", fontSize: floating ? 17 : 16 }}>
-        Daily 9 AM – 11 PM
+      <span style={{ fontFamily: "var(--font-prata),serif", fontSize: floating ? 17 : 14 }}>
+        {floating ? 'Daily 9 AM – 11 PM' : '9 AM – 11 PM'}
       </span>
     </div>
   );
@@ -121,9 +122,11 @@ export default function Hero() {
           padding: 'clamp(24px,4vw,60px) 20px 80px',
           gap: 'clamp(20px,4vw,48px)',
         }}
+        className="hero-grid"
       >
         <div
           ref={heroTextRef}
+          className="hero-copy"
           style={{
             position: 'relative',
             zIndex: 2,
@@ -146,7 +149,8 @@ export default function Hero() {
             }}
           >
             <span style={{ width: 28, height: 1, background: '#c8623a', display: 'inline-block' }} />
-            Madina Mall · Ground Floor · Dubai UAE
+            <span className="desktop-only">Madina Mall · Ground Floor · Dubai UAE</span>
+            <span className="mobile-only">Madina Mall · Ground Floor</span>
           </span>
           <h1
             style={{
@@ -164,6 +168,7 @@ export default function Hero() {
             First <em style={{ fontStyle: 'italic', color: '#e0855d' }}>Sip.</em>
           </h1>
           <p
+            className="hero-sub"
             style={{
               margin: 0,
               fontSize: 'clamp(16px,1.4vw,20px)',
@@ -177,10 +182,10 @@ export default function Hero() {
             Specialty coffees, ceremonial matcha, vibrant smoothies &amp; artisan pastries — crafted
             daily at Madina Mall, Dubai.
           </p>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginTop: 4 }}>
+          <div className="hero-actions" style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginTop: 4 }}>
             <Link
               href="/menu"
-              className="btn-solid-light lift2"
+              className="btn-solid-light lift2 hero-btn"
               style={{
                 background: '#f4ede4',
                 color: '#2b1d16',
@@ -194,13 +199,19 @@ export default function Hero() {
                 minHeight: 50,
                 display: 'inline-flex',
                 alignItems: 'center',
+                gap: 10,
               }}
             >
-              View Full Menu
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true">
+                <path d="M4 7h16M4 12h16M4 17h10" />
+              </svg>
+              <span>
+                View <span className="desktop-only">Full&nbsp;</span>Menu
+              </span>
             </Link>
             <Link
               href="/visit"
-              className="btn-outline-light"
+              className="btn-outline-light hero-btn"
               style={{
                 border: '1.5px solid rgba(244,237,228,.6)',
                 color: '#f4ede4',
@@ -214,17 +225,23 @@ export default function Hero() {
                 minHeight: 50,
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: 8,
+                gap: 10,
               }}
             >
-              Find Us <span>→</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M12 21s-6-5.3-6-10a6 6 0 0 1 12 0c0 4.7-6 10-6 10z" />
+                <circle cx="12" cy="11" r="2.2" />
+              </svg>
+              Find Us
             </Link>
           </div>
           <div
+            className="hero-meta"
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: 14,
+              flexWrap: 'wrap',
+              gap: '12px 18px',
               marginTop: 8,
               fontSize: 14,
               color: '#c9a88f',
@@ -244,13 +261,14 @@ export default function Hero() {
                 {GOOGLE_REVIEW_COUNT} Google reviews
               </span>
             </a>
+            {/* Mobile only: sits in the text flow so it never covers the cup or the scroll hint. */}
+            <OpenBadge />
           </div>
-          {/* Mobile only: sits in the text flow so it never covers the cup or the scroll hint. */}
-          <OpenBadge />
         </div>
 
         {/* THE CUP */}
         <div
+          className="hero-cup"
           style={{
             position: 'relative',
             zIndex: 1,

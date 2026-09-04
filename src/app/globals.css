@@ -182,6 +182,27 @@ nav.desktop-only {
   .topbar {
     height: 0;
   }
+  /* Home hero on phones: everything above the cup is compacted so the cup is
+     visible on the first screen (subtext hidden, icon buttons, one-row meta). */
+  .hero-grid {
+    padding-bottom: 48px !important;
+    gap: 8px !important;
+    align-content: start;
+  }
+  .hero-copy {
+    gap: 14px !important;
+  }
+  .hero-sub {
+    display: none;
+  }
+  .hero-btn {
+    padding: 13px 20px !important;
+    min-height: 46px !important;
+    font-size: 12px !important;
+  }
+  .hero-cup {
+    min-height: min(62vw, 300px) !important;
+  }
 }
 
 /* ── Hover states (the design tool's style-hover attribute) ───────────── */
