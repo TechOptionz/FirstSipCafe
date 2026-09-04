@@ -41,7 +41,7 @@ export default function ReviewsMarquee() {
           <h2
             style={{
               margin: 0,
-              fontFamily: "'Prata',serif",
+              fontFamily: "var(--font-prata),serif",
               fontWeight: 400,
               fontSize: 'clamp(38px,5vw,68px)',
               lineHeight: 1.02,
@@ -51,7 +51,7 @@ export default function ReviewsMarquee() {
           </h2>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-          <span style={{ fontFamily: "'Prata',serif", fontSize: 56, lineHeight: 1 }}>4.9</span>
+          <span style={{ fontFamily: "var(--font-prata),serif", fontSize: 56, lineHeight: 1 }}>4.9</span>
           <span style={{ display: 'flex', flexDirection: 'column' }}>
             <span style={{ color: '#c8623a', letterSpacing: 3 }}>★★★★★</span>
             <span style={{ fontSize: 14, color: '#5a4636' }}>120+ verified reviews</span>
@@ -96,7 +96,7 @@ export default function ReviewsMarquee() {
                   color: '#f4ede4',
                   display: 'grid',
                   placeItems: 'center',
-                  fontFamily: "'Prata',serif",
+                  fontFamily: "var(--font-prata),serif",
                 }}
               >
                 {r.initial}

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { MAPS_URL, PAGES, PAGE_HREFS, PAGE_LABELS, TEL_LANDLINE } from '@/lib/data';
 
@@ -80,13 +81,11 @@ export default function Nav() {
             href="/"
             style={{ display: 'flex', alignItems: 'center', gap: 12, cursor: 'pointer', flex: 'none' }}
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src="/assets/logo-256.png"
-              srcSet="/assets/logo-256.png 1x, /assets/logo-512.png 2x"
               alt="First Sip Cafe"
-              width={256}
-              height={256}
+              width={62}
+              height={62}
               style={{
                 width: 62,
                 height: 62,
@@ -97,7 +96,7 @@ export default function Nav() {
               }}
             />
             <span style={{ display: 'flex', flexDirection: 'column', lineHeight: 1 }}>
-              <span style={{ fontFamily: "'Prata',serif", fontSize: 21, letterSpacing: '.16em' }}>
+              <span style={{ fontFamily: "var(--font-prata),serif", fontSize: 21, letterSpacing: '.16em' }}>
                 FIRST SIP
               </span>
               <span
@@ -251,7 +250,7 @@ export default function Nav() {
                   justifyContent: 'space-between',
                   alignItems: 'center',
                   padding: '16px 4px',
-                  fontFamily: "'Prata',serif",
+                  fontFamily: "var(--font-prata),serif",
                   fontSize: 28,
                   borderBottom: '1px solid rgba(43,29,22,.08)',
                   cursor: 'pointer',

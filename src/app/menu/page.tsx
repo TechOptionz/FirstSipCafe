@@ -20,7 +20,7 @@ export default function MenuPage() {
         }}
       >
         <div className="slot-anchor-top" style={{ position: 'absolute', inset: 0, opacity: 0.5 }}>
-          <ImageSlot id="hero-menu" placeholder="Café counter photo" />
+          <ImageSlot id="hero-menu" placeholder="Café counter photo" priority />
         </div>
         <div
           style={{
@@ -55,7 +55,7 @@ export default function MenuPage() {
           <h1
             style={{
               margin: 0,
-              fontFamily: "'Prata',serif",
+              fontFamily: "var(--font-prata),serif",
               fontWeight: 400,
               fontSize: 'clamp(48px,8vw,120px)',
               lineHeight: 0.95,

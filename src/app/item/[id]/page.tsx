@@ -111,7 +111,7 @@ export default async function ItemPage({ params }: { params: Promise<{ id: strin
                 animation: 'zoomIn 1.2s cubic-bezier(.2,.7,.2,1) both',
               }}
             >
-              <ImageSlot id={`menu-${item.id}`} placeholder={`${item.name} — hero photo`} />
+              <ImageSlot id={`menu-${item.id}`} placeholder={`${item.name} — hero photo`} priority sizes="(max-width: 860px) 100vw, 50vw" />
             </div>
             <span
               style={{
@@ -154,7 +154,7 @@ export default async function ItemPage({ params }: { params: Promise<{ id: strin
             <h1
               style={{
                 margin: 0,
-                fontFamily: "'Prata',serif",
+                fontFamily: "var(--font-prata),serif",
                 fontWeight: 400,
                 fontSize: 'clamp(44px,6vw,88px)',
                 lineHeight: 0.98,
@@ -166,7 +166,7 @@ export default async function ItemPage({ params }: { params: Promise<{ id: strin
             <div style={{ display: 'flex', alignItems: 'baseline', gap: 8 }}>
               <span
                 style={{
-                  fontFamily: "'Prata',serif",
+                  fontFamily: "var(--font-prata),serif",
                   fontSize: 'clamp(30px,3.5vw,44px)',
                   color: '#c8623a',
                 }}
@@ -285,7 +285,7 @@ export default async function ItemPage({ params }: { params: Promise<{ id: strin
               <span>← Previous</span>
               <span
                 style={{
-                  fontFamily: "'Prata',serif",
+                  fontFamily: "var(--font-prata),serif",
                   fontSize: 18,
                   letterSpacing: 0,
                   textTransform: 'none',
@@ -312,7 +312,7 @@ export default async function ItemPage({ params }: { params: Promise<{ id: strin
               <span>Next →</span>
               <span
                 style={{
-                  fontFamily: "'Prata',serif",
+                  fontFamily: "var(--font-prata),serif",
                   fontSize: 18,
                   letterSpacing: 0,
                   textTransform: 'none',
@@ -340,7 +340,7 @@ export default async function ItemPage({ params }: { params: Promise<{ id: strin
             <h2
               style={{
                 margin: 0,
-                fontFamily: "'Prata',serif",
+                fontFamily: "var(--font-prata),serif",
                 fontWeight: 400,
                 fontSize: 'clamp(30px,4vw,52px)',
               }}
@@ -402,7 +402,7 @@ export default async function ItemPage({ params }: { params: Promise<{ id: strin
                   }}
                 >
                   <div className="zoom" style={{ position: 'absolute', inset: 0 }}>
-                    <ImageSlot id={`menu-${it.id}`} placeholder={it.name} />
+                    <ImageSlot id={`menu-${it.id}`} placeholder={it.name} sizes="(max-width: 444px) 72vw, 320px" />
                   </div>
                   <div
                     style={{
@@ -418,7 +418,7 @@ export default async function ItemPage({ params }: { params: Promise<{ id: strin
                       position: 'absolute',
                       top: 16,
                       left: 16,
-                      fontFamily: "'Prata',serif",
+                      fontFamily: "var(--font-prata),serif",
                       fontSize: 13,
                       letterSpacing: '.1em',
                       color: '#f4ede4',
@@ -463,7 +463,7 @@ export default async function ItemPage({ params }: { params: Promise<{ id: strin
                   >
                     <span
                       style={{
-                        fontFamily: "'Prata',serif",
+                        fontFamily: "var(--font-prata),serif",
                         fontSize: 'clamp(22px,2vw,28px)',
                         lineHeight: 1.1,
                         textWrap: 'balance',
@@ -471,13 +471,13 @@ export default async function ItemPage({ params }: { params: Promise<{ id: strin
                     >
                       {it.name}
                     </span>
-                    <span style={{ fontFamily: "'Prata',serif", fontSize: 20, whiteSpace: 'nowrap' }}>
+                    <span style={{ fontFamily: "var(--font-prata),serif", fontSize: 20, whiteSpace: 'nowrap' }}>
                       {it.price}{' '}
                       <span
                         style={{
                           fontSize: 11,
                           letterSpacing: '.14em',
-                          fontFamily: "'Outfit',sans-serif",
+                          fontFamily: "var(--font-outfit),sans-serif",
                         }}
                       >
                         AED

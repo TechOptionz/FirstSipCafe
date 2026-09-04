@@ -39,7 +39,7 @@ export default function Picks() {
           position: 'absolute',
           right: '-1%',
           top: 'clamp(20px,3vw,40px)',
-          fontFamily: "'Prata',serif",
+          fontFamily: "var(--font-prata),serif",
           fontSize: 'clamp(120px,18vw,260px)',
           lineHeight: 1,
           color: 'transparent',
@@ -82,7 +82,7 @@ export default function Picks() {
           <h2
             style={{
               margin: 0,
-              fontFamily: "'Prata',serif",
+              fontFamily: "var(--font-prata),serif",
               fontWeight: 400,
               fontSize: 'clamp(40px,5.6vw,84px)',
               lineHeight: 0.98,
@@ -202,7 +202,7 @@ export default function Picks() {
                 }}
               >
                 <div className="zoom" style={{ position: 'absolute', inset: 0 }}>
-                  <ImageSlot id={`menu-${item.id}`} placeholder={item.name} />
+                  <ImageSlot id={`menu-${item.id}`} placeholder={item.name} sizes="(max-width: 560px) 78vw, 440px" />
                 </div>
                 <div
                   style={{
@@ -218,7 +218,7 @@ export default function Picks() {
                     position: 'absolute',
                     top: 16,
                     left: 16,
-                    fontFamily: "'Prata',serif",
+                    fontFamily: "var(--font-prata),serif",
                     fontSize: 13,
                     letterSpacing: '.1em',
                     color: '#f4ede4',
@@ -263,7 +263,7 @@ export default function Picks() {
                 >
                   <span
                     style={{
-                      fontFamily: "'Prata',serif",
+                      fontFamily: "var(--font-prata),serif",
                       fontSize: 'clamp(22px,2vw,30px)',
                       lineHeight: 1.1,
                       textWrap: 'balance',
@@ -271,13 +271,13 @@ export default function Picks() {
                   >
                     {item.name}
                   </span>
-                  <span style={{ fontFamily: "'Prata',serif", fontSize: 20, whiteSpace: 'nowrap' }}>
+                  <span style={{ fontFamily: "var(--font-prata),serif", fontSize: 20, whiteSpace: 'nowrap' }}>
                     {item.price}{' '}
                     <span
                       style={{
                         fontSize: 11,
                         letterSpacing: '.14em',
-                        fontFamily: "'Outfit',sans-serif",
+                        fontFamily: "var(--font-outfit),sans-serif",
                       }}
                     >
                       AED

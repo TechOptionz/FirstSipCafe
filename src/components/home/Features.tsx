@@ -47,7 +47,7 @@ export default function Features() {
             }}
           >
             <div className="zoom" style={{ position: 'absolute', inset: 0 }}>
-              <ImageSlot id={`feature-${f.id}`} placeholder={`${f.name} photo`} />
+              <ImageSlot id={`feature-${f.id}`} placeholder={`${f.name} photo`} sizes="(max-width: 860px) 100vw, 50vw" />
             </div>
           </Link>
           <div
@@ -56,7 +56,7 @@ export default function Features() {
           >
             <span
               style={{
-                fontFamily: "'Prata',serif",
+                fontFamily: "var(--font-prata),serif",
                 fontSize: 'clamp(60px,8vw,110px)',
                 lineHeight: 0.8,
                 color: 'transparent',
@@ -68,7 +68,7 @@ export default function Features() {
             <h3
               style={{
                 margin: 0,
-                fontFamily: "'Prata',serif",
+                fontFamily: "var(--font-prata),serif",
                 fontWeight: 400,
                 fontSize: 'clamp(34px,4.2vw,58px)',
                 lineHeight: 1.04,

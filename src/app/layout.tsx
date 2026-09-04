@@ -1,8 +1,19 @@
 import type { Metadata, Viewport } from 'next';
+import { Prata, Outfit } from 'next/font/google';
 import './globals.css';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import { Analytics } from '@vercel/analytics/next';
+
+// Self-hosted via next/font: no render-blocking Google Fonts request, fonts are
+// preloaded from our own origin and swapped in without layout shift.
+const prata = Prata({ weight: '400', subsets: ['latin'], display: 'swap', variable: '--font-prata' });
+const outfit = Outfit({
+  weight: ['300', '400', '500', '600'],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-outfit',
+});
 
 export const metadata: Metadata = {
   title: 'First Sip Cafe · Madina Mall, Dubai',
@@ -25,15 +36,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Prata&family=Outfit:wght@300;400;500;600&display=swap"
-          rel="stylesheet"
-        />
-      </head>
+    <html lang="en" className={`${prata.variable} ${outfit.variable}`}>
       <body>
         <div
           style={{
@@ -42,7 +45,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             flexDirection: 'column',
             background: '#f4ede4',
             color: '#2b1d16',
-            fontFamily: "'Outfit',sans-serif",
+            fontFamily: 'var(--font-outfit),sans-serif',
             overflowX: 'clip',
           }}
         >

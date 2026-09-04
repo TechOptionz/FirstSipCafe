@@ -1,19 +1,43 @@
+import Image from 'next/image';
 import { SLOT_IMAGES } from '@/lib/slot-images';
+import { BLUR_DATA } from '@/lib/blur-data';
 
 /**
  * Static port of the design's <image-slot>.
  *
- * The design left every slot empty (a dashed ring + caption). Drop real photos
- * in by adding `slot id -> /images/…` entries to src/lib/slot-images.ts.
+ * Filled slots render through next/image: responsive srcset (driven by `sizes`),
+ * AVIF/WebP output, native lazy loading, and a blurred preview from
+ * src/lib/blur-data.ts while the photo streams in. Pass `priority` for the one
+ * image that is above the fold on a page so it is preloaded instead of lazy.
+ *
+ * Add photos by mapping `slot id -> /images/…` in src/lib/slot-images.ts and
+ * running `node scripts/optimize-images.mjs`.
  */
-export default function ImageSlot({ id, placeholder }: { id: string; placeholder: string }) {
+type Props = {
+  id: string;
+  placeholder: string;
+  /** CSS `sizes` hint: how wide this slot renders. Defaults to full width. */
+  sizes?: string;
+  /** Preload instead of lazy-load (above-the-fold images only). */
+  priority?: boolean;
+};
+
+export default function ImageSlot({ id, placeholder, sizes = '100vw', priority = false }: Props) {
   const src = SLOT_IMAGES[id];
 
   if (src) {
+    const blur = BLUR_DATA[src];
     return (
       <div className="slot slot-filled">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={src} alt={placeholder} />
+        <Image
+          src={src}
+          alt={placeholder}
+          fill
+          sizes={sizes}
+          priority={priority}
+          placeholder={blur ? 'blur' : 'empty'}
+          blurDataURL={blur}
+        />
       </div>
     );
   }

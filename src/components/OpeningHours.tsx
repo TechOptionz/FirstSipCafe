@@ -30,7 +30,7 @@ export default function OpeningHours() {
           gap: 10,
         }}
       >
-        <span style={{ fontFamily: "'Prata',serif", fontSize: 28 }}>Opening Hours</span>
+        <span style={{ fontFamily: "var(--font-prata),serif", fontSize: 28 }}>Opening Hours</span>
         <span
           style={{
             display: 'inline-flex',

@@ -20,7 +20,7 @@ export default function ReviewsPage() {
         }}
       >
         <div style={{ position: 'absolute', inset: 0, opacity: 0.5 }}>
-          <ImageSlot id="hero-reviews" placeholder="Guests in the café" />
+          <ImageSlot id="hero-reviews" placeholder="Guests in the café" priority />
         </div>
         <div
           style={{
@@ -57,7 +57,7 @@ export default function ReviewsPage() {
             <h1
               style={{
                 margin: 0,
-                fontFamily: "'Prata',serif",
+                fontFamily: "var(--font-prata),serif",
                 fontWeight: 400,
                 fontSize: 'clamp(48px,8vw,120px)',
                 lineHeight: 0.95,
@@ -69,7 +69,7 @@ export default function ReviewsPage() {
           <div style={{ display: 'flex', alignItems: 'center', gap: 18, justifySelf: 'end' }}>
             <span
               style={{
-                fontFamily: "'Prata',serif",
+                fontFamily: "var(--font-prata),serif",
                 fontSize: 'clamp(64px,8vw,110px)',
                 lineHeight: 1,
               }}
@@ -149,7 +149,7 @@ export default function ReviewsPage() {
                     color: '#f4ede4',
                     display: 'grid',
                     placeItems: 'center',
-                    fontFamily: "'Prata',serif",
+                    fontFamily: "var(--font-prata),serif",
                   }}
                 >
                   {r.initial}
@@ -183,7 +183,7 @@ export default function ReviewsPage() {
             gap: 10,
           }}
         >
-          <span style={{ fontFamily: "'Prata',serif", fontSize: 16 }}>G</span> See All Reviews on
+          <span style={{ fontFamily: "var(--font-prata),serif", fontSize: 16 }}>G</span> See All Reviews on
           Google
         </a>
       </div>

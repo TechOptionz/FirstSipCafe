@@ -39,7 +39,7 @@ export default function VisitPage() {
         }}
       >
         <div className="slot-anchor-upper" style={{ position: 'absolute', inset: 0, opacity: 0.5 }}>
-          <ImageSlot id="visit-storefront" placeholder="Storefront photo — Madina Mall, Shop G01" />
+          <ImageSlot id="visit-storefront" placeholder="Storefront photo — Madina Mall, Shop G01" priority />
         </div>
         <div
           style={{
@@ -76,7 +76,7 @@ export default function VisitPage() {
           <h1
             style={{
               margin: 0,
-              fontFamily: "'Prata',serif",
+              fontFamily: "var(--font-prata),serif",
               fontWeight: 400,
               fontSize: 'clamp(48px,8vw,120px)',
               lineHeight: 0.95,
@@ -101,7 +101,7 @@ export default function VisitPage() {
         <div className="reveal" style={{ display: 'flex', flexDirection: 'column' }}>
           <div style={block}>
             <span style={label}>Address</span>
-            <span style={{ fontFamily: "'Prata',serif", fontSize: 22, lineHeight: 1.4 }}>
+            <span style={{ fontFamily: "var(--font-prata),serif", fontSize: 22, lineHeight: 1.4 }}>
               Madina Mall, Ground Floor, Shop G01
               <br />
               Al Muhasinah 4, Dubai, UAE
@@ -123,19 +123,19 @@ export default function VisitPage() {
           </div>
           <div style={block}>
             <span style={label}>Landline</span>
-            <a href={`tel:${TEL_LANDLINE}`} style={{ fontFamily: "'Prata',serif", fontSize: 26 }}>
+            <a href={`tel:${TEL_LANDLINE}`} style={{ fontFamily: "var(--font-prata),serif", fontSize: 26 }}>
               +971 42 880 478
             </a>
           </div>
           <div style={block}>
             <span style={label}>Mobile / WhatsApp</span>
-            <a href={`tel:${TEL_MOBILE}`} style={{ fontFamily: "'Prata',serif", fontSize: 26 }}>
+            <a href={`tel:${TEL_MOBILE}`} style={{ fontFamily: "var(--font-prata),serif", fontSize: 26 }}>
               +971 52 940 0208
             </a>
           </div>
           <div style={{ ...block, borderBottom: '1px solid rgba(43,29,22,.15)' }}>
             <span style={label}>Hours</span>
-            <span style={{ fontFamily: "'Prata',serif", fontSize: 22 }}>
+            <span style={{ fontFamily: "var(--font-prata),serif", fontSize: 22 }}>
               Every Day · 9:00 AM – 11:00 PM
             </span>
           </div>

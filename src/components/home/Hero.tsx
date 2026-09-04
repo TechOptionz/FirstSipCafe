@@ -2,6 +2,8 @@
 
 import { useEffect, useRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
+import { BLUR_DATA } from '@/lib/blur-data';
 
 export default function Hero() {
   const cupRef = useRef<HTMLDivElement>(null);
@@ -27,11 +29,22 @@ export default function Hero() {
     <div
       style={{
         position: 'relative',
-        background: "#2b1d16 url('/assets/hero-bg.png') center/cover no-repeat",
+        background: '#2b1d16',
         color: '#f4ede4',
         overflow: 'hidden',
       }}
     >
+      {/* Hero backdrop: preloaded, responsive, blurred preview while it streams in. */}
+      <Image
+        src="/assets/hero-bg.webp"
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        placeholder="blur"
+        blurDataURL={BLUR_DATA['/assets/hero-bg.webp']}
+        style={{ objectFit: 'cover', objectPosition: 'center' }}
+      />
       <div
         style={{
           position: 'absolute',
@@ -84,7 +97,7 @@ export default function Hero() {
           <h1
             style={{
               margin: 0,
-              fontFamily: "'Prata',serif",
+              fontFamily: "var(--font-prata),serif",
               fontWeight: 400,
               fontSize: 'clamp(56px,9.5vw,132px)',
               lineHeight: 0.94,
@@ -188,7 +201,7 @@ export default function Hero() {
           >
             <span
               style={{
-                fontFamily: "'Prata',serif",
+                fontFamily: "var(--font-prata),serif",
                 fontSize: 'clamp(120px,22vw,320px)',
                 lineHeight: 1,
                 color: 'transparent',
@@ -432,7 +445,7 @@ export default function Hero() {
                     border: '1.5px solid rgba(244,237,228,.85)',
                     display: 'grid',
                     placeItems: 'center',
-                    fontFamily: "'Prata',serif",
+                    fontFamily: "var(--font-prata),serif",
                     fontSize: 19,
                     textShadow: '0 1px 0 rgba(0,0,0,.25)',
                   }}
@@ -442,7 +455,7 @@ export default function Hero() {
                 <span
                   style={{
                     position: 'relative',
-                    fontFamily: "'Prata',serif",
+                    fontFamily: "var(--font-prata),serif",
                     fontSize: 'clamp(12px,1.4vw,15px)',
                     letterSpacing: '.3em',
                     textShadow: '0 1px 0 rgba(0,0,0,.25)',
@@ -549,7 +562,7 @@ export default function Hero() {
               />
               Open Now
             </span>
-            <span style={{ fontFamily: "'Prata',serif", fontSize: 17 }}>Daily 9 AM – 11 PM</span>
+            <span style={{ fontFamily: "var(--font-prata),serif", fontSize: 17 }}>Daily 9 AM – 11 PM</span>
           </div>
         </div>
 

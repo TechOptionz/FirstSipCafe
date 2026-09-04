@@ -118,7 +118,7 @@ export default function MenuBrowser() {
               <div style={{ display: 'flex', alignItems: 'flex-end', gap: 18 }}>
                 <span
                   style={{
-                    fontFamily: "'Prata',serif",
+                    fontFamily: "var(--font-prata),serif",
                     fontSize: 'clamp(56px,7vw,96px)',
                     lineHeight: 0.85,
                     color: 'transparent',
@@ -141,7 +141,7 @@ export default function MenuBrowser() {
                   <h2
                     style={{
                       margin: 0,
-                      fontFamily: "'Prata',serif",
+                      fontFamily: "var(--font-prata),serif",
                       fontWeight: 400,
                       fontSize: 'clamp(34px,4.4vw,60px)',
                       lineHeight: 1,
@@ -229,14 +229,14 @@ export default function MenuBrowser() {
                     }}
                   >
                     <div className="zoom" style={{ position: 'absolute', inset: 0 }}>
-                      <ImageSlot id={`menu-${it.id}`} placeholder={it.name} />
+                      <ImageSlot id={`menu-${it.id}`} placeholder={it.name} sizes="(max-width: 420px) 72vw, 300px" />
                     </div>
                     <span
                       style={{
                         position: 'absolute',
                         top: 14,
                         left: 14,
-                        fontFamily: "'Prata',serif",
+                        fontFamily: "var(--font-prata),serif",
                         fontSize: 13,
                         letterSpacing: '.1em',
                         color: '#f4ede4',
@@ -273,7 +273,7 @@ export default function MenuBrowser() {
                       padding: '0 4px',
                     }}
                   >
-                    <span style={{ fontFamily: "'Prata',serif", fontSize: 20, lineHeight: 1.2 }}>
+                    <span style={{ fontFamily: "var(--font-prata),serif", fontSize: 20, lineHeight: 1.2 }}>
                       {it.name}
                     </span>
                     <span

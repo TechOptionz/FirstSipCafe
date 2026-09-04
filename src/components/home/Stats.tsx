@@ -68,7 +68,7 @@ export default function Stats() {
             }}
           >
             <span
-              style={{ fontFamily: "'Prata',serif", fontSize: 'clamp(48px,6vw,88px)', lineHeight: 1 }}
+              style={{ fontFamily: "var(--font-prata),serif", fontSize: 'clamp(48px,6vw,88px)', lineHeight: 1 }}
             >
               {s.value}
             </span>

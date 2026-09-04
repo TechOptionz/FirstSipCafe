@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import ImageSlot from '@/components/ImageSlot';
 import { MAPS_URL, TEL_LANDLINE, TEL_MOBILE } from '@/lib/data';
@@ -103,7 +104,7 @@ export default function Footer() {
           <h2
             style={{
               margin: 0,
-              fontFamily: "'Prata',serif",
+              fontFamily: "var(--font-prata),serif",
               fontWeight: 400,
               fontSize: 'clamp(34px,4.6vw,64px)',
               lineHeight: 1,
@@ -168,13 +169,11 @@ export default function Footer() {
       >
         <div style={{ display: 'flex', flexDirection: 'column', gap: 20, gridColumn: 'span 1' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src="/assets/logo-256.png"
-              srcSet="/assets/logo-256.png 1x, /assets/logo-512.png 2x"
               alt="First Sip Cafe"
-              width={256}
-              height={256}
+              width={64}
+              height={64}
               style={{
                 width: 64,
                 height: 64,
@@ -185,7 +184,7 @@ export default function Footer() {
               }}
             />
             <span style={{ display: 'flex', flexDirection: 'column', lineHeight: 1 }}>
-              <span style={{ fontFamily: "'Prata',serif", fontSize: 22, letterSpacing: '.16em' }}>
+              <span style={{ fontFamily: "var(--font-prata),serif", fontSize: 22, letterSpacing: '.16em' }}>
                 FIRST SIP
               </span>
               <span
@@ -289,7 +288,7 @@ export default function Footer() {
             >
               Landline
             </span>
-            <span style={{ fontFamily: "'Prata',serif", fontSize: 18 }}>+971 42 880 478</span>
+            <span style={{ fontFamily: "var(--font-prata),serif", fontSize: 18 }}>+971 42 880 478</span>
           </a>
           <a href={`tel:${TEL_MOBILE}`} style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
             <span
@@ -302,7 +301,7 @@ export default function Footer() {
             >
               Mobile / WhatsApp
             </span>
-            <span style={{ fontFamily: "'Prata',serif", fontSize: 18 }}>+971 52 940 0208</span>
+            <span style={{ fontFamily: "var(--font-prata),serif", fontSize: 18 }}>+971 52 940 0208</span>
           </a>
         </div>
       </div>
@@ -323,7 +322,7 @@ export default function Footer() {
             textLength="1000"
             lengthAdjust="spacingAndGlyphs"
             style={{
-              fontFamily: "'Prata',serif",
+              fontFamily: "var(--font-prata),serif",
               fontSize: 160,
               fill: 'transparent',
               stroke: 'rgba(244,237,228,.4)',
@@ -342,7 +341,7 @@ export default function Footer() {
             y="132"
             textLength="1000"
             lengthAdjust="spacingAndGlyphs"
-            style={{ fontFamily: "'Prata',serif", fontSize: 160, fill: 'rgba(244,237,228,0)' }}
+            style={{ fontFamily: "var(--font-prata),serif", fontSize: 160, fill: 'rgba(244,237,228,0)' }}
           >
             FIRST SIP
           </text>

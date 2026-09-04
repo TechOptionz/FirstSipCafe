@@ -5,7 +5,7 @@ body {
   padding: 0;
   background: #f4ede4;
   color: #2b1d16;
-  font-family: 'Outfit', sans-serif;
+  font-family: var(--font-outfit), sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 * {

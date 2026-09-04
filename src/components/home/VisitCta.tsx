@@ -48,7 +48,7 @@ export default function VisitCta() {
         <h2
           style={{
             margin: 0,
-            fontFamily: "'Prata',serif",
+            fontFamily: "var(--font-prata),serif",
             fontWeight: 400,
             fontSize: 'clamp(38px,6vw,84px)',
             lineHeight: 1,

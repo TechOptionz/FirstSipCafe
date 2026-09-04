@@ -31,7 +31,7 @@ export default function Tiles() {
           }}
         >
           <div className="zoom" style={{ position: 'absolute', inset: 0 }}>
-            <ImageSlot id={`tile-${t.id}`} placeholder={t.placeholder} />
+            <ImageSlot id={`tile-${t.id}`} placeholder={t.placeholder} sizes="(max-width: 640px) 100vw, (max-width: 960px) 50vw, 34vw" />
           </div>
           <div
             style={{
@@ -68,7 +68,7 @@ export default function Tiles() {
             </span>
             <span
               style={{
-                fontFamily: "'Prata',serif",
+                fontFamily: "var(--font-prata),serif",
                 fontSize: 'clamp(32px,3.4vw,48px)',
                 lineHeight: 1,
               }}

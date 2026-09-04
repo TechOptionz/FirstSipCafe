@@ -19,7 +19,7 @@ export default function Marquee() {
           <span
             key={i}
             style={{
-              fontFamily: "'Prata',serif",
+              fontFamily: "var(--font-prata),serif",
               fontSize: 'clamp(34px,5vw,72px)',
               lineHeight: 1,
               padding: '0 28px',
