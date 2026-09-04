@@ -10,7 +10,7 @@ import { GoogleMark, Stars } from '@/components/reviews/GoogleBadge';
 
 /**
  * "Open now · Every day 10 AM – 10:30 PM" chip. Rendered twice in the hero: `floating`
- * (desktop only, absolute over the cup) and inline (mobile only, in the copy column).
+ * (desktop only, absolute at the top-right of the cup column) and inline (mobile only, in the copy column).
  * The desktop-only / mobile-only classes in globals.css switch at 860px.
  */
 function OpenBadge({ floating = false }: { floating?: boolean }) {
@@ -19,7 +19,7 @@ function OpenBadge({ floating = false }: { floating?: boolean }) {
       className={floating ? 'desktop-only' : 'mobile-only'}
       style={{
         ...(floating
-          ? { position: 'absolute', right: 0, bottom: '4%', zIndex: 2 }
+          ? { position: 'absolute', right: 0, top: '6%', zIndex: 2 }
           : { alignSelf: 'center' }),
         background: 'rgba(244,237,228,.95)',
         color: '#2b1d16',
@@ -614,7 +614,7 @@ export default function Hero() {
               />
             </div>
           </div>
-          {/* Desktop: floats at the bottom-right of the cup. On mobile the same badge
+          {/* Desktop: floats at the top-right of the cup. On mobile the same badge
               renders inline under the rating instead (see OpenBadge below). */}
           <OpenBadge floating />
         </div>
