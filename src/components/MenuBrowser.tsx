@@ -47,8 +47,8 @@ export default function MenuBrowser() {
   return (
     <>
       <div
+        className="sticky-desktop"
         style={{
-          position: 'sticky',
           top: 64,
           zIndex: 10,
           background: 'rgba(244,237,228,.92)',

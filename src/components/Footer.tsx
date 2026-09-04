@@ -2,6 +2,8 @@
 
 import { useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import ImageSlot from '@/components/ImageSlot';
 import { MAPS_URL, TEL_LANDLINE, TEL_MOBILE } from '@/lib/data';
 
 const colHead: React.CSSProperties = {
@@ -15,21 +17,28 @@ const colHead: React.CSSProperties = {
 };
 
 export default function Footer() {
+  // Home already has its own full-width interior banner right above the footer.
+  const showCtaPhoto = usePathname() !== '/';
+  const footerRef = useRef<HTMLElement>(null);
   const wordmarkRef = useRef<SVGSVGElement>(null);
   const strokeRef = useRef<SVGTextElement>(null);
   const fillRef = useRef<SVGTextElement>(null);
 
   useEffect(() => {
     const draw = () => {
+      const foot = footerRef.current;
       const svg = wordmarkRef.current;
       const st = strokeRef.current;
       const fl = fillRef.current;
-      if (!svg || !st) return;
-      const r = svg.getBoundingClientRect();
+      if (!foot || !svg || !st) return;
+      const r = foot.getBoundingClientRect();
       const vh = window.innerHeight;
-      // 0 when the wordmark's top enters the viewport, 1 when its bottom is ~80px above the viewport bottom
-      const p = Math.max(0, Math.min(1, (vh - r.top) / (r.height + 80)));
-      const eased = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+      // Spread the draw across the whole footer's scroll range so it stays visible while
+      // scrolling: 0 when the footer's top enters the viewport, 1 when the page is fully scrolled
+      // (footer bottom meets the viewport bottom). Wordmark alone was too short a range.
+      const p = Math.max(0, Math.min(1, (vh - r.top) / r.height));
+      // ease-out: starts drawing immediately, finishes gently
+      const eased = 1 - Math.pow(1 - p, 2);
       st.style.strokeDashoffset = String(1400 * (1 - eased));
       if (fl) fl.style.fill = `rgba(244,237,228,${Math.max(0, (p - 0.75) / 0.25) * 0.07})`;
     };
@@ -43,10 +52,15 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer style={{ background: '#1c120d', color: '#f4ede4', overflow: 'hidden', position: 'relative' }}>
+    <footer
+      ref={footerRef}
+      style={{ background: '#1c120d', color: '#f4ede4', overflow: 'hidden', position: 'relative' }}
+    >
       {/* CTA strip */}
       <div
         style={{
+          position: 'relative',
+          overflow: 'hidden',
           padding: 'clamp(48px,6vw,80px) clamp(20px,4vw,64px)',
           borderBottom: '1px solid rgba(244,237,228,.1)',
           display: 'flex',
@@ -57,9 +71,24 @@ export default function Footer() {
           background: 'linear-gradient(180deg,#2b1d16,#1c120d)',
         }}
       >
+        {showCtaPhoto && (
+          <>
+            <div className="slot-anchor-top" style={{ position: 'absolute', inset: 0, opacity: 0.45 }}>
+              <ImageSlot id="footer-cta" placeholder="Café interior photo" />
+            </div>
+            <div
+              style={{
+                position: 'absolute',
+                inset: 0,
+                background: 'linear-gradient(90deg,rgba(28,18,13,.85),rgba(28,18,13,.45))',
+                pointerEvents: 'none',
+              }}
+            />
+          </>
+        )}
         <div
           className="reveal-30"
-          style={{ display: 'flex', flexDirection: 'column', gap: 12, maxWidth: 640 }}
+          style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', gap: 12, maxWidth: 640 }}
         >
           <span
             style={{
@@ -84,7 +113,7 @@ export default function Footer() {
             Come by the Ground Floor. Open every day until 11 PM.
           </h2>
         </div>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
+        <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexWrap: 'wrap', gap: 12 }}>
           <a
             href={MAPS_URL}
             target="_blank"
@@ -301,6 +330,8 @@ export default function Footer() {
               strokeWidth: 1.2,
               strokeDasharray: 1400,
               strokeDashoffset: 1400,
+              // smooth out scroll jumps so the stroke visibly draws instead of snapping
+              transition: 'stroke-dashoffset .9s cubic-bezier(.2,.7,.2,1)',
             }}
           >
             FIRST SIP

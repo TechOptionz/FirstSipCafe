@@ -90,7 +90,8 @@ export default async function ItemPage({ params }: { params: Promise<{ id: strin
         }}
       >
         <div
-          style={{ position: 'sticky', top: 96, animation: 'fadeUp .8s cubic-bezier(.2,.7,.2,1) both' }}
+          className="sticky-desktop"
+          style={{ top: 96, animation: 'fadeUp .8s cubic-bezier(.2,.7,.2,1) both' }}
         >
           <div
             style={{

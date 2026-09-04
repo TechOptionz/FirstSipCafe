@@ -30,7 +30,7 @@ export default function VisitPage() {
       <div
         style={{
           position: 'relative',
-          minHeight: '46vh',
+          minHeight: '58vh',
           display: 'grid',
           placeItems: 'center',
           overflow: 'hidden',
@@ -38,7 +38,7 @@ export default function VisitPage() {
           color: '#f4ede4',
         }}
       >
-        <div style={{ position: 'absolute', inset: 0, opacity: 0.5 }}>
+        <div className="slot-anchor-upper" style={{ position: 'absolute', inset: 0, opacity: 0.5 }}>
           <ImageSlot id="visit-storefront" placeholder="Storefront photo — Madina Mall, Shop G01" />
         </div>
         <div

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import ImageSlot from '@/components/ImageSlot';
 import MenuBrowser from '@/components/MenuBrowser';
 
 export const metadata: Metadata = {
@@ -11,13 +12,28 @@ export default function MenuPage() {
     <section style={{ display: 'flex', flexDirection: 'column' }}>
       <div
         style={{
+          position: 'relative',
+          overflow: 'hidden',
           background: '#2b1d16',
           color: '#f4ede4',
           padding: 'clamp(48px,7vw,96px) clamp(20px,4vw,64px) clamp(40px,5vw,64px)',
         }}
       >
+        <div className="slot-anchor-top" style={{ position: 'absolute', inset: 0, opacity: 0.5 }}>
+          <ImageSlot id="hero-menu" placeholder="Café counter photo" />
+        </div>
         <div
           style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'linear-gradient(90deg,rgba(28,18,13,.8),rgba(28,18,13,.45))',
+            pointerEvents: 'none',
+          }}
+        />
+        <div
+          style={{
+            position: 'relative',
+            zIndex: 1,
             maxWidth: 'none',
             margin: 0,
             display: 'flex',

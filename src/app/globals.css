@@ -137,17 +137,9 @@ button {
   text-transform: uppercase;
   height: 34px;
   overflow: hidden;
-  transition: height .35s ease;
-}
-[data-scrolled='true'] .topbar {
-  height: 0;
 }
 .navbar {
   height: 80px;
-  transition: height .35s ease;
-}
-[data-scrolled='true'] .navbar {
-  height: 64px;
 }
 .navwrap {
   background: rgba(244, 237, 228, .85);
@@ -171,7 +163,16 @@ nav.desktop-only {
 .mobile-only {
   display: none;
 }
+/* Pinned panels (item hero image, menu filter bar) only stick on desktop.
+   On mobile the layout is single-column, so they must scroll with the page. */
+.sticky-desktop {
+  position: sticky;
+}
 @media (max-width: 859px) {
+  .sticky-desktop {
+    position: static !important;
+    top: auto !important;
+  }
   .desktop-only {
     display: none !important;
   }
@@ -328,6 +329,13 @@ nav.desktop-only {
   height: 100%;
   object-fit: cover;
   display: block;
+}
+/* Keep the top of the photo (e.g. wall signage) in frame when the banner is short. */
+.slot-anchor-top .slot img {
+  object-position: center top;
+}
+.slot-anchor-upper .slot img {
+  object-position: center 30%;
 }
 .slot-empty {
   position: absolute;

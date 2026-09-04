@@ -13,10 +13,26 @@
  * Slot ids in use:
  *   tile-menu · tile-visit · tile-reviews          (home tiles)
  *   feature-hot · feature-brew · feature-matcha · feature-food
- *   visit-hero · visit-storefront
+ *   visit-hero · visit-storefront · footer-cta · hero-menu · hero-reviews
  *   menu-<categoryId>-<index>                      (every menu item, e.g. menu-hot-3)
  */
 export const SLOT_IMAGES: Record<string, string> = {
+  // Home page slots live in public/images/home/.
+  'tile-menu': '/images/home/tile-menu.png',
+  'tile-visit': '/images/home/tile-visit.png',
+  'tile-reviews': '/images/home/tile-reviews.png',
+  'feature-hot': '/images/home/feature-hot.jpg',
+  'feature-brew': '/images/home/feature-brew.png',
+  'feature-matcha': '/images/home/feature-matcha.png',
+  'feature-food': '/images/home/feature-food.png',
+  'visit-hero': '/images/home/visit-hero.png',
+  'visit-storefront': '/images/home/visit-storefront.png',
+  // Interior photo behind the footer "Come by the Ground Floor" strip (all pages except home).
+  'footer-cta': '/images/home/footer-cta.png',
+  // Page headers.
+  'hero-reviews': '/images/home/hero-reviews.png',
+  'hero-menu': '/images/home/hero-menu.png',
+
   // Menu photos live in public/images/menu/. Numbers are the item's position
   // in the full menu order (see MENU in data.ts). Items without an entry
   // Every item currently has a photo; remove an entry to fall back to the

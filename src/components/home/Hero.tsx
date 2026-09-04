@@ -27,7 +27,7 @@ export default function Hero() {
     <div
       style={{
         position: 'relative',
-        background: "#2b1d16 url('/assets/hero-bg.jpg') center/cover no-repeat",
+        background: "#2b1d16 url('/assets/hero-bg.png') center/cover no-repeat",
         color: '#f4ede4',
         overflow: 'hidden',
       }}
