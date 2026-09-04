@@ -3,34 +3,47 @@
  *
  *   node scripts/optimize-images.mjs
  *
- * - Converts every .png/.jpg/.jpeg under public/images/** (and the hero background
- *   in public/assets) to WebP, capped at a sensible width, and removes the original.
- * - Regenerates src/lib/blur-data.ts: a tiny base64 preview per image that
- *   <ImageSlot> shows while the real photo streams in.
+ * 1. Converts every .png/.jpg/.jpeg under public/images/** (plus the hero
+ *    background in public/assets) to WebP, capped at a sensible width, and
+ *    removes the original.
+ * 2. Pre-generates the responsive sizes as static files next to each photo
+ *    (e.g. espresso-384.webp, espresso-640.webp). next/image picks one of these
+ *    through src/lib/image-loader.ts, so no image is ever encoded at request
+ *    time: they are plain static files on any host, in dev and in production.
+ * 3. Writes src/lib/image-manifest.ts (which widths exist per photo) and
+ *    src/lib/blur-data.ts (a tiny base64 preview per photo).
  *
  * Re-run it whenever you drop new photos into public/images.
  */
 import sharp from 'sharp';
-import { readdirSync, statSync, unlinkSync, writeFileSync } from 'fs';
+import { readdirSync, statSync, unlinkSync, writeFileSync, existsSync } from 'fs';
 import { join, extname, basename, dirname, sep } from 'path';
 
 const ROOT = new URL('..', import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1');
+const PUBLIC = join(ROOT, 'public');
 const TARGETS = [
-  { dir: 'public/images/menu', maxWidth: 1200 },
-  { dir: 'public/images/home', maxWidth: 1920 },
-  { dir: 'public/assets', maxWidth: 1920, only: /^hero-bg\./ },
+  { dir: 'public/images/menu', maxWidth: 1200, widths: [384, 640, 960] },
+  { dir: 'public/images/home', maxWidth: 1920, widths: [640, 960, 1280] },
+  { dir: 'public/assets', maxWidth: 1920, widths: [640, 960, 1280], only: /^hero-bg\./ },
+  { dir: 'public/assets', maxWidth: 256, widths: [64, 128], only: /^logo-256\./, keep: true },
 ];
 const QUALITY = 80;
+const VARIANT = /-\d+\.webp$/; // generated size variants, never treated as sources
 
-const walk = (d) => readdirSync(d).flatMap((f) => {
-  const p = join(d, f);
-  return statSync(p).isDirectory() ? walk(p) : [p];
-});
+const walk = (d) =>
+  readdirSync(d).flatMap((f) => {
+    const p = join(d, f);
+    return statSync(p).isDirectory() ? walk(p) : [p];
+  });
+const urlOf = (file) => '/' + file.slice(PUBLIC.length + 1).split(sep).join('/');
+const kb = (n) => `${(n / 1024).toFixed(0)}KB`;
 
-let before = 0, after = 0;
+// 1. Convert originals to WebP.
+let before = 0;
+let after = 0;
 for (const t of TARGETS) {
-  const dir = join(ROOT, t.dir);
-  for (const file of walk(dir)) {
+  if (t.keep) continue;
+  for (const file of walk(join(ROOT, t.dir))) {
     const ext = extname(file).toLowerCase();
     if (!['.png', '.jpg', '.jpeg'].includes(ext)) continue;
     if (t.only && !t.only.test(basename(file))) continue;
@@ -42,27 +55,58 @@ for (const t of TARGETS) {
       .webp({ quality: QUALITY, effort: 5 })
       .toFile(out);
     const dst = statSync(out).size;
-    before += src; after += dst;
+    before += src;
+    after += dst;
     unlinkSync(file);
-    console.log(`${basename(file)} -> ${basename(out)}  ${(src / 1024).toFixed(0)}KB -> ${(dst / 1024).toFixed(0)}KB`);
+    console.log(`${basename(file)} -> ${basename(out)}  ${kb(src)} -> ${kb(dst)}`);
   }
 }
-if (before) console.log(`\nConverted: ${(before / 1048576).toFixed(1)}MB -> ${(after / 1048576).toFixed(1)}MB`);
+if (before) console.log(`Converted: ${(before / 1048576).toFixed(1)}MB -> ${(after / 1048576).toFixed(1)}MB\n`);
 
-// Blur placeholders for every optimised image.
+// 2 + 3. Size variants, manifest, blur previews.
+const manifest = {};
 const blur = {};
+let variants = 0;
 for (const t of TARGETS) {
   for (const file of walk(join(ROOT, t.dir))) {
-    if (extname(file) !== '.webp') continue;
-    if (t.only && !t.only.test(basename(file))) continue;
+    const name = basename(file);
+    if (VARIANT.test(name)) continue;
+    if (t.only && !t.only.test(name)) continue;
+    if (!t.only && extname(name) !== '.webp') continue;
+    const { width } = await sharp(file).metadata();
+    const stem = join(dirname(file), name.replace(/\.[a-z]+$/i, ''));
+    const widths = [];
+    for (const w of t.widths) {
+      if (w >= width) continue;
+      const out = `${stem}-${w}.webp`;
+      if (!existsSync(out) || statSync(out).mtimeMs < statSync(file).mtimeMs) {
+        await sharp(file).resize({ width: w }).webp({ quality: QUALITY, effort: 5 }).toFile(out);
+        variants++;
+      }
+      widths.push(w);
+    }
+    widths.push(width); // the source file itself is the largest size
+    manifest[urlOf(file)] = widths;
     const buf = await sharp(file).resize({ width: 10 }).webp({ quality: 30 }).toBuffer();
-    const url = '/' + file.slice(join(ROOT, 'public').length + 1).split(sep).join('/');
-    blur[url] = `data:image/webp;base64,${buf.toString('base64')}`;
+    blur[urlOf(file)] = `data:image/webp;base64,${buf.toString('base64')}`;
   }
 }
-const lines = Object.keys(blur).sort().map((k) => `  '${k}': '${blur[k]}',`);
+
+const keys = Object.keys(manifest).sort();
+writeFileSync(
+  join(ROOT, 'src/lib/image-manifest.ts'),
+  `// Generated by scripts/optimize-images.mjs — do not edit by hand.\n` +
+    `// Widths available for each photo; all but the last exist as <name>-<width>.webp.\n` +
+    `export const IMAGE_WIDTHS: Record<string, number[]> = {\n` +
+    keys.map((k) => `  '${k}': [${manifest[k].join(', ')}],`).join('\n') +
+    `\n};\n`,
+);
 writeFileSync(
   join(ROOT, 'src/lib/blur-data.ts'),
-  `// Generated by scripts/optimize-images.mjs — do not edit by hand.\n// Tiny base64 previews shown while each photo loads.\nexport const BLUR_DATA: Record<string, string> = {\n${lines.join('\n')}\n};\n`,
+  `// Generated by scripts/optimize-images.mjs — do not edit by hand.\n` +
+    `// Tiny base64 previews shown while each photo loads.\n` +
+    `export const BLUR_DATA: Record<string, string> = {\n` +
+    keys.map((k) => `  '${k}': '${blur[k]}',`).join('\n') +
+    `\n};\n`,
 );
-console.log(`Wrote src/lib/blur-data.ts (${lines.length} entries)`);
+console.log(`Generated ${variants} size variants; manifest + blur data for ${keys.length} images.`);
