@@ -4,7 +4,7 @@ import './globals.css';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import { Analytics } from '@vercel/analytics/next';
-import { GEO, GOOGLE_REVIEWS_URL, HOURS, MAPS_URL, TEL_LANDLINE } from '@/lib/data';
+import { EMAIL, GEO, GOOGLE_REVIEWS_URL, HOURS, MAPS_URL, TEL_LANDLINE } from '@/lib/data';
 import { GOOGLE_RATING, GOOGLE_REVIEW_COUNT, REVIEWS } from '@/lib/reviews';
 
 // Structured data so Google can show the rating, map and hours with the site.
@@ -15,6 +15,7 @@ const JSON_LD = {
   image: 'https://www.firstsipcafe.ae/assets/logo-512.png',
   url: 'https://www.firstsipcafe.ae/',
   telephone: TEL_LANDLINE,
+  email: EMAIL,
   servesCuisine: 'Coffee',
   priceRange: 'AED 10–22',
   address: {

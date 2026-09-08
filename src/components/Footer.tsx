@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import ImageSlot from '@/components/ImageSlot';
-import { GOOGLE_REVIEWS_URL, HOURS, MAPS_DIRECTIONS_URL, MAPS_URL, TEL_LANDLINE, TEL_MOBILE } from '@/lib/data';
+import { EMAIL, GOOGLE_REVIEWS_URL, HOURS, MAPS_DIRECTIONS_URL, MAPS_URL, TEL_LANDLINE, TEL_MOBILE } from '@/lib/data';
 import { GOOGLE_RATING, GOOGLE_REVIEW_COUNT } from '@/lib/reviews';
 import { GoogleMark, Stars } from '@/components/reviews/GoogleBadge';
 
@@ -310,6 +310,21 @@ export default function Footer() {
               Mobile / WhatsApp
             </span>
             <span style={{ fontFamily: "var(--font-prata),serif", fontSize: 18 }}>+971 52 940 0208</span>
+          </a>
+          <a href={`mailto:${EMAIL}`} style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+            <span
+              style={{
+                fontSize: 11,
+                letterSpacing: '.18em',
+                textTransform: 'uppercase',
+                color: '#8a6f5e',
+              }}
+            >
+              Email
+            </span>
+            <span style={{ fontFamily: "var(--font-prata),serif", fontSize: 16, wordBreak: 'break-all' }}>
+              {EMAIL}
+            </span>
           </a>
         </div>
       </div>

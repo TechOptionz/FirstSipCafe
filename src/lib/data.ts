@@ -163,5 +163,6 @@ export const GEO = { lat: 25.2819856, lng: 55.3979621 };
 export const ADDRESS_LINES = ['Madina Mall, Ground Floor, Shop G01', 'Al Muhasinah 4, Dubai, UAE'];
 export const TEL_LANDLINE = '+97142880478';
 export const TEL_MOBILE = '+971529400208';
+export const EMAIL = 'Firstsipcafe1@gmail.com';
 
 export const pad2 = (n: number) => String(n).padStart(2, '0');
