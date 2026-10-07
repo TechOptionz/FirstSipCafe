@@ -4,6 +4,7 @@ import { useEffect, useLayoutEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import ImageSlot from '@/components/ImageSlot';
+import ScrollRow from '@/components/ScrollRow';
 import { CATS, pad2 } from '@/lib/data';
 
 // Runs before paint on the client, plain effect on the server — lets the page
@@ -189,7 +190,7 @@ export default function MenuBrowser() {
               </div>
             </div>
 
-            <div
+            <ScrollRow
               id={`row-${c.id}`}
               className="hscroll"
               style={{
@@ -229,7 +230,7 @@ export default function MenuBrowser() {
                     }}
                   >
                     <div className="zoom" style={{ position: 'absolute', inset: 0 }}>
-                      <ImageSlot id={`menu-${it.id}`} placeholder={it.name} sizes="(max-width: 420px) 72vw, 300px" />
+                      <ImageSlot id={`menu-${it.id}`} placeholder={it.name} sizes="(max-width: 420px) 72vw, 300px" index={i} />
                     </div>
                     <span
                       style={{
@@ -294,7 +295,7 @@ export default function MenuBrowser() {
                   </div>
                 </Link>
               ))}
-            </div>
+            </ScrollRow>
           </div>
         ))}
       </div>

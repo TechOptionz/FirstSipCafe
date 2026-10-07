@@ -1,4 +1,7 @@
+'use client';
+
 import Image from 'next/image';
+import { useRowEager } from '@/components/ScrollRow';
 import { SLOT_IMAGES } from '@/lib/slot-images';
 import { BLUR_DATA } from '@/lib/blur-data';
 
@@ -11,6 +14,9 @@ import { BLUR_DATA } from '@/lib/blur-data';
  * from src/lib/blur-data.ts while the photo streams in. Pass `priority` for the one
  * image that is above the fold on a page so it is preloaded instead of lazy.
  *
+ * Inside a <ScrollRow> pass the card's `index`: the row switches the cards the
+ * user is about to scroll to from lazy to eager loading (see ScrollRow.tsx).
+ *
  * Add photos by mapping `slot id -> /images/…` in src/lib/slot-images.ts and
  * running `node scripts/optimize-images.mjs`.
  */
@@ -21,10 +27,13 @@ type Props = {
   sizes?: string;
   /** Preload instead of lazy-load (above-the-fold images only). */
   priority?: boolean;
+  /** Position of this card inside the enclosing <ScrollRow>, if any. */
+  index?: number;
 };
 
-export default function ImageSlot({ id, placeholder, sizes = '100vw', priority = false }: Props) {
+export default function ImageSlot({ id, placeholder, sizes = '100vw', priority = false, index }: Props) {
   const src = SLOT_IMAGES[id];
+  const eager = useRowEager(index);
 
   if (src) {
     const blur = BLUR_DATA[src];
@@ -36,6 +45,7 @@ export default function ImageSlot({ id, placeholder, sizes = '100vw', priority =
           fill
           sizes={sizes}
           priority={priority}
+          loading={!priority && eager ? 'eager' : undefined}
           placeholder={blur ? 'blur' : 'empty'}
           blurDataURL={blur}
         />

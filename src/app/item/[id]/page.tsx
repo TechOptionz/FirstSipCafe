@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import ImageSlot from '@/components/ImageSlot';
+import ScrollRow from '@/components/ScrollRow';
 import { ALL_ITEMS, CATS, HOURS, ITEM_BY_ID, MAPS_URL, TEL_LANDLINE, pad2 } from '@/lib/data';
 
 export function generateStaticParams() {
@@ -363,7 +364,7 @@ export default async function ItemPage({ params }: { params: Promise<{ id: strin
             </Link>
           </div>
 
-          <div
+          <ScrollRow
             className="hscroll"
             style={{
               display: 'flex',
@@ -375,7 +376,7 @@ export default async function ItemPage({ params }: { params: Promise<{ id: strin
               scrollPaddingLeft: 'clamp(20px,4vw,64px)',
             }}
           >
-            {related.map((it) => (
+            {related.map((it, i) => (
               <Link
                 key={it.id}
                 href={`/item/${it.id}`}
@@ -402,7 +403,7 @@ export default async function ItemPage({ params }: { params: Promise<{ id: strin
                   }}
                 >
                   <div className="zoom" style={{ position: 'absolute', inset: 0 }}>
-                    <ImageSlot id={`menu-${it.id}`} placeholder={it.name} sizes="(max-width: 444px) 72vw, 320px" />
+                    <ImageSlot id={`menu-${it.id}`} placeholder={it.name} sizes="(max-width: 444px) 72vw, 320px" index={i} />
                   </div>
                   <div
                     style={{
@@ -527,7 +528,7 @@ export default async function ItemPage({ params }: { params: Promise<{ id: strin
                 </div>
               </Link>
             ))}
-          </div>
+          </ScrollRow>
         </div>
       </div>
     </section>

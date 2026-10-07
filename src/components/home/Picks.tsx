@@ -3,6 +3,7 @@
 import { useRef, useState } from 'react';
 import Link from 'next/link';
 import ImageSlot from '@/components/ImageSlot';
+import ScrollRow from '@/components/ScrollRow';
 import { ITEM_BY_ID, PICKS, pad2 } from '@/lib/data';
 
 export default function Picks() {
@@ -157,7 +158,7 @@ export default function Picks() {
         </div>
       </div>
 
-      <div
+      <ScrollRow
         ref={carouselRef}
         onScroll={onScroll}
         className="hscroll"
@@ -202,7 +203,7 @@ export default function Picks() {
                 }}
               >
                 <div className="zoom" style={{ position: 'absolute', inset: 0 }}>
-                  <ImageSlot id={`menu-${item.id}`} placeholder={item.name} sizes="(max-width: 560px) 78vw, 440px" />
+                  <ImageSlot id={`menu-${item.id}`} placeholder={item.name} sizes="(max-width: 560px) 78vw, 440px" index={i} />
                 </div>
                 <div
                   style={{
@@ -318,7 +319,7 @@ export default function Picks() {
             </Link>
           );
         })}
-      </div>
+      </ScrollRow>
 
       <div style={{ padding: '0 clamp(20px,4vw,64px)', display: 'flex', gap: 6 }}>
         {PICKS.map((_, i) => (

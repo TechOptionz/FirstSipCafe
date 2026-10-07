@@ -6,14 +6,18 @@ const nextConfig = {
     // as static files; the loader maps each requested width to one of them.
     loader: 'custom',
     loaderFile: './src/lib/image-loader.ts',
-    // Must match the widths the script generates (see TARGETS there).
-    deviceSizes: [640, 960, 1280, 1920],
-    imageSizes: [128, 384],
+    // Every width the script generates (see TARGETS there). next/image only
+    // offers candidates >= deviceSizes[0] * (smallest vw in `sizes`), so 384 has
+    // to be a *device* size for the 384px menu/review variants to be used at all.
+    deviceSizes: [384, 640, 960, 1280, 1920],
+    imageSizes: [128],
   },
   async headers() {
     return [
       {
-        // Photos are content-addressed by the optimiser run; cache them hard.
+        // Photos only ever change under a new file name; cache them hard.
+        // Applies under `next start`/Vercel. Netlify serves public/ from its CDN
+        // and ignores this, so netlify.toml repeats it.
         source: '/images/:path*',
         headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }],
       },
